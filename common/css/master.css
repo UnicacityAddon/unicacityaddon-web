@@ -1,0 +1,212 @@
+:root {
+    --lightblue: #00ffff;
+    --darkblue: #1e90ff;
+    --lightgray: #d3d3d3;
+    --gray: #808080;
+    --darkgray: #3f3f3f;
+    --lightgreen: #00ad06;
+    --darkgreen: #105306;
+    --red: #e43b3b;
+}
+
+@keyframes comeIn {from {opacity: 0;} to {opacity: 100%;}}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', serif;
+}
+
+a button {
+    border: none;
+    border-radius: 1em;
+    padding: 10px 20px;
+    font-size: 30px;
+    background-color: var(--darkblue);
+    color: var(--darkgray);
+}
+
+a.link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--darkblue);
+    text-decoration-thickness: 3px;
+}
+
+a.link:hover {
+    text-decoration-color: #ffffff;
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.4s;
+}
+
+.nav-child {
+    margin: 0 20px;
+    color: var(--lightgray);
+    text-decoration: none;
+}
+
+.nav-child-left {float: left;}
+.nav-child-right {float: right;}
+
+.nav-child-right:hover {
+    color: #ffffff;
+    text-decoration: underline var(--darkblue) 5px;
+}
+
+/*
+==============================================================================================================
+  ___ _   _ ____  _______  __
+ |_ _| \ | |  _ \| ____\ \/ /
+  | ||  \| | | | |  _|  \  /
+  | || |\  | |_| | |___ /  \
+ |___|_| \_|____/|_____/_/\_\
+==============================================================================================================
+*/
+
+.index-first {
+    background: linear-gradient(to top left, var(--darkblue), var(--gray)) no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.index-second, .index-third {
+    background-image: url(/Screenshot_20220829-094134_Chrome.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 45vh;
+    background-color: #00ad06;
+}
+
+.index-third {
+    background-color: dodgerblue;
+}
+
+.index-first-content {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 25vh 15vh 0 15vh;
+    position: absolute;
+    color: var(--darkgray);
+}
+
+.index-second-content {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0vh 15vh 0 15vh;
+    position: absolute;
+    color: var(--darkgray);
+}
+
+.index-third-content {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0vh 15vh 0 15vh;
+    position: absolute;
+    color: var(--darkgray);
+}
+
+.index-first-content p {
+    margin: 0;
+    padding: 20px 0;
+    line-height: 1;
+}
+
+.index-second-content p {
+    margin: 0;
+    padding: 20px 0;
+    line-height: 1;
+}
+
+/*HOUSEBANS*/
+
+.housebans {
+    background: linear-gradient(to top left, var(--darkblue), var(--gray)) no-repeat;
+    background-size: cover;
+}
+
+.housebans-content {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10vh 15vh 10vh 15vh;
+    position: relative;
+    color: var(--darkgray);
+}
+
+.housebans-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.housebans-content table tr td {
+    padding: 3px 10px;
+}
+
+.housebans-content table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.2);
+
+}
+
+
+
+
+
+
+/*
+==============================================================================================================
+  _____ ___   ___ _____ _____ ____
+ |  ___/ _ \ / _ \_   _| ____|  _ \
+ | |_ | | | | | | || | |  _| | |_) |
+ |  _|| |_| | |_| || | | |___|  _ <
+ |_|   \___/ \___/ |_| |_____|_| \_\
+==============================================================================================================
+*/
+
+footer {
+    background-color: var(--darkgray);
+    height: 40vh;
+
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 5vh 15vh;
+    position: absolute;
+    border: none;
+}
+
+footer table {
+    width: 100%;
+    text-align: right;
+    color: var(--lightgray);
+}
+
+footer table tr td img {
+    width: 100px;
+    float: left;
+}
+
+footer table tr td {
+    vertical-align: top;
+}
+
+footer table tr td a {
+    text-align: right;
+    color: white;
+    text-decoration: none;
+}
+
+footer span {
+    margin-top: 20px;
+    float: right;
+    text-align: right;
+    color: var(--lightgray);
+}
