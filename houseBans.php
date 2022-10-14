@@ -91,7 +91,7 @@
             </td>
         </tr>
     </table>
-    <span class="text-14-400" style="color: var(--gray)">UnicacityAddon<br>© 2022 RettichLP and Diimikou</span>
+    <span class="text-14-400" style="color: var(--gray)">UnicacityAddon<br>© 2022 RettichLP and Dimiikou</span>
 </footer>
 </body>
 </html>
