@@ -8,6 +8,7 @@
             <a class="text-14-400" style="text-decoration: none; color: white;" href="https://discord.gg/A9u5eY7CbS">UnicacityAddon Discord</a><br>
             <a class="text-14-400" style="text-decoration: none; color: white;" href="https://github.com/rettichlp/UnicacityAddon-1.12.2/issues/new?assignees=&labels=bug&template=bug-oder-fehler.md&title=UCAB+-+F%C3%BCge+hier+eine+kurze+Beschreibung+ein">You found a bug?</a><br>
             <a class="text-14-400" style="text-decoration: none; color: white;" href="https://github.com/rettichlp/UnicacityAddon-1.12.2/issues/new?assignees=&labels=enhancement&template=feature.md&title=UCAF+-+F%C3%BCge+hier+eine+kurze+Beschreibung+ein">You have an idea for a new feature?</a><br>
+            <a class="text-14-400" style="text-decoration: none; color: white;" href="https://github.com/rettichlp/UnicacityAddon-1.12.2/wiki">Wiki</a><br>
             <a class="text-14-400" style="text-decoration: none; color: white;" href="https://unicacity.de/teamspeak">UnicaCity TeamSpeak</a><br>
         </div>
         <div class="grid-c grid-right">

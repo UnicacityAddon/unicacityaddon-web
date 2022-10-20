@@ -9,8 +9,10 @@
     --gray: #808080;
     --darkgray: #3f3f3f;
     --lightgreen: #00ad06;
-    --darkgreen: #105306;
+    --green: #135d09;
     --red: #e43b3b;
+    --orange: #e46e3b;
+    --pink: #d93be4;
 }
 
 @keyframes comeIn {from {opacity: 0;} to {opacity: 100%;}}
@@ -232,13 +234,13 @@ a.link:hover {
 ==============================================================================================================
 */
 
-.wantedReasons, .housebans {
+.wantedReasons, .housebans, .team {
     position: relative;
     margin: 10vh 10vw;
     z-index: 0;
 }
 
-.wantedReasons p, .housebans p {
+.wantedReasons > p, .housebans > p, .team > p {
     margin: 25px 0;
     color: white;
 }
@@ -278,6 +280,33 @@ a.link:hover {
     width: max-content;
 }
 
+.team-group {
+    display: grid;
+    grid-row-gap: 25px;
+    grid-column-gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%/1, max(64px, 100%/5)), 302px));
+    margin-bottom: 50px;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.team-group-entry {
+    width: 250px;
+    max-height: 100%;
+    text-align: center;
+    color: white;
+    background-color: rgba(0,0, 0, 0.5);
+    padding: 25px;
+    border-radius: 5px;
+}
+
+.team-group-entry img {border-radius: 5px;}
+.team-group-entry.ceo {border: 1px solid var(--red);}
+.team-group-entry.dev {border: 1px solid var(--green);}
+.team-group-entry.mod {border: 1px solid var(--blue);}
+.team-group-entry.sup {border: 1px solid var(--orange);}
+.team-group-entry.bet {border: 1px solid var(--pink);}
+
 /*
 ==============================================================================================================
   _____ ___   ___ _____ _____ ____
@@ -289,7 +318,7 @@ a.link:hover {
 */
 
 .footer-grid {
-    grid-template-columns: 28vw repeat(4, 12vw);
+    grid-template-columns: 20vw repeat(4, 14vw);
     grid-column-gap: 1vw;
     grid-row-gap: 1vw;
     grid-template-areas:
