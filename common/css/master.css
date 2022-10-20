@@ -1,6 +1,10 @@
+/* https://ts3index.com/?lang=en&page=generator&sub=ascii */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 :root {
-    --lightblue: #00ffff;
-    --darkblue: #1e90ff;
+    --blue: #609fee;
+    --darkblue: #416ba1;
     --lightgray: #d3d3d3;
     --gray: #808080;
     --darkgray: #3f3f3f;
@@ -11,26 +15,58 @@
 
 @keyframes comeIn {from {opacity: 0;} to {opacity: 100%;}}
 
-body {
+body, h2, p {
     margin: 0;
+}
+
+body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', serif;
 }
+
+/*
+==============================================================================================================
+ __     _____ ____  _____ ___
+ \ \   / /_ _|  _ \| ____/ _ \
+  \ \ / / | || | | |  _|| | | |
+   \ V /  | || |_| | |__| |_| |
+    \_/  |___|____/|_____\___/
+==============================================================================================================
+*/
+
+#backgroundVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    filter: brightness(40%) saturate(150%);
+}
+
+/*
+==============================================================================================================
+  ____  _   _ _____ _____ ___  _   _
+ | __ )| | | |_   _|_   _/ _ \| \ | |
+ |  _ \| | | | | |   | || | | |  \| |
+ | |_) | |_| | | |   | || |_| | |\  |
+ |____/ \___/  |_|   |_| \___/|_| \_|
+==============================================================================================================
+*/
 
 a button {
     border: none;
     border-radius: 1em;
     padding: 10px 20px;
     font-size: 30px;
-    background-color: var(--darkblue);
+    background-color: var(--blue);
     color: var(--darkgray);
 }
 
 a.link {
     color: inherit;
     text-decoration: underline;
-    text-decoration-color: var(--darkblue);
+    text-decoration-color: var(--blue);
     text-decoration-thickness: 3px;
 }
 
@@ -38,14 +74,55 @@ a.link:hover {
     text-decoration-color: #ffffff;
 }
 
+.button-download {
+    margin: 20px 0;
+    padding: 10px 50px;
+    background-color: var(--blue);
+    color: white;
+}
+
+.button-download:hover {
+    background-color: var(--darkblue);
+    color: var(--lightgray);
+}
+
+/*
+==============================================================================================================
+   ____ ____  ___ ____
+  / ___|  _ \|_ _|  _ \
+ | |  _| |_) || || | | |
+ | |_| |  _ < | || |_| |
+  \____|_| \_\___|____/
+==============================================================================================================
+*/
+
+.grid-center {text-align: center;}
+.grid-right {text-align: right;}
+.grid-a {grid-area: a;}
+.grid-b {grid-area: b;}
+.grid-c {grid-area: c;}
+.grid-d {grid-area: d;}
+.grid-e {grid-area: e;}
+.grid-f {grid-area: f;}
+
+/*
+==============================================================================================================
+  _   _    ___     __
+ | \ | |  / \ \   / /
+ |  \| | / _ \ \ / /
+ | |\  |/ ___ \ V /
+ |_| \_/_/   \_\_/
+==============================================================================================================
+*/
+
 .nav {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 40px;
+    padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    z-index: 1;
+    z-index: 2;
     transition: 0.4s;
 }
 
@@ -60,7 +137,7 @@ a.link:hover {
 
 .nav-child-right:hover {
     color: #ffffff;
-    text-decoration: underline var(--darkblue) 5px;
+    text-decoration: underline var(--blue) 5px;
 }
 
 /*
@@ -73,93 +150,133 @@ a.link:hover {
 ==============================================================================================================
 */
 
-.index-first {
-    background: linear-gradient(to top left, var(--darkblue), var(--gray)) no-repeat;
-    background-size: cover;
+.index-main {
+    z-index: 1;
     height: 100vh;
 }
 
-.index-second, .index-third {
-    background-image: url(/Screenshot_20220829-094134_Chrome.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 45vh;
-    background-color: #00ad06;
-}
-
-.index-third {
-    background-color: dodgerblue;
-}
-
-.index-first-content {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 25vh 15vh 0 15vh;
-    position: absolute;
-    color: var(--darkgray);
-}
-
-.index-second-content {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0vh 15vh 0 15vh;
-    position: absolute;
-    color: var(--darkgray);
-}
-
-.index-third-content {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0vh 15vh 0 15vh;
-    position: absolute;
-    color: var(--darkgray);
-}
-
-.index-first-content p {
-    margin: 0;
-    padding: 20px 0;
-    line-height: 1;
-}
-
-.index-second-content p {
-    margin: 0;
-    padding: 20px 0;
-    line-height: 1;
-}
-
-/*HOUSEBANS*/
-
-.housebans {
-    background: linear-gradient(to top left, var(--darkblue), var(--gray)) no-repeat;
-    background-size: cover;
-}
-
-.housebans-content {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 10vh 15vh 10vh 15vh;
+.index-main-content {
     position: relative;
-    color: var(--darkgray);
+    top: 25vh;
+    left: 10vw;
+    margin: 0;
+    box-sizing: border-box;
+    width: max-content;
+    color: white;
 }
 
-.housebans-content table {
-    width: 100%;
-    border-collapse: collapse;
+.index-main-content p {
+    margin: 0;
+    padding: 20px 0;
+    line-height: 1;
 }
 
-.housebans-content table tr td {
-    padding: 3px 10px;
+.index-statistic, .index-history, .footer {
+    position: relative;
+    z-index: 0;
+    box-shadow:
+            inset 0 12px 16px -10px black,
+            inset 0 -12px 16px -10px black;
+    padding: 50px 0;
+    background-color: var(--darkgray);
 }
 
-.housebans-content table tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.2);
-
+.index-history {
+    z-index: 1;
+    box-shadow: none;
+    background-color: transparent;
 }
 
+.index-statistic-grid, .index-history-grid, .footer-grid {
+    position: relative;
+    display: grid;
+    margin: 0 10vw;
+    width: 80vw;
+    justify-content: space-between;
+    color: white;
+}
 
+.index-statistic-grid {
+    grid-template-columns: 500px 300px 300px;
+    grid-row-gap: 20px;
+    grid-template-areas:
+        "a b c"
+        "d e f";
+}
 
+.index-history-grid {
+    grid-template-columns: auto;
+    grid-row-gap: 20px;
+    grid-column-gap: 20px;
+    grid-template-areas:
+        "a b"
+        "c c";
+}
 
+.index-history-grid > div > img {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 320px;
+    margin: auto;
+}
 
+/*
+==============================================================================================================
+  ____  _   _ ____  ____   _    ____ _____ ____
+ / ___|| | | | __ )|  _ \ / \  / ___| ____/ ___|
+ \___ \| | | |  _ \| |_) / _ \| |  _|  _| \___ \
+  ___) | |_| | |_) |  __/ ___ \ |_| | |___ ___) |
+ |____/ \___/|____/|_| /_/   \_\____|_____|____/
+==============================================================================================================
+*/
+
+.wantedReasons, .housebans {
+    position: relative;
+    margin: 10vh 10vw;
+    z-index: 0;
+}
+
+.wantedReasons p, .housebans p {
+    margin: 25px 0;
+    color: white;
+}
+
+.wantedReasons-flexBar, .housebans-flexBar {
+    position: relative;
+    width: 80vw;
+    color: white;
+    display: flex;
+}
+
+.wantedReasons-flexBar {
+    justify-content: space-between;
+}
+
+.housebans-flexBar {
+    flex: 0 0 100;
+    align-items: center;
+    justify-content: center;
+}
+
+.housebans-flexBar-name {
+    align-content: center;
+    flex: 0 0 300px;
+}
+
+.housebans-flexBar-reason {
+    flex: 3;
+}
+
+.housebans-flexBar-date {
+    flex: 1;
+    text-align: right;
+}
+
+.housebans-flexBar > div {
+    width: max-content;
+}
 
 /*
 ==============================================================================================================
@@ -171,42 +288,11 @@ a.link:hover {
 ==============================================================================================================
 */
 
-footer {
-    background-color: var(--darkgray);
-    height: 40vh;
-
-    box-sizing: border-box;
-    width: 100%;
-    margin: 0;
-    padding: 5vh 15vh;
-    position: absolute;
-    border: none;
-}
-
-footer table {
-    width: 100%;
-    text-align: right;
-    color: var(--lightgray);
-}
-
-footer table tr td img {
-    width: 100px;
-    float: left;
-}
-
-footer table tr td {
-    vertical-align: top;
-}
-
-footer table tr td a {
-    text-align: right;
-    color: white;
-    text-decoration: none;
-}
-
-footer span {
-    margin-top: 20px;
-    float: right;
-    text-align: right;
-    color: var(--lightgray);
+.footer-grid {
+    grid-template-columns: 28vw repeat(4, 12vw);
+    grid-column-gap: 1vw;
+    grid-row-gap: 1vw;
+    grid-template-areas:
+        "a b c d e"
+        "a f f f f";
 }
