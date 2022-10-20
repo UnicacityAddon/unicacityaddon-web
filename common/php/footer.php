@@ -13,8 +13,8 @@
         </div>
         <div class="grid-c grid-right">
             <p class="text-20-800">Gameplay</p>
-            <a class="text-14-400" style="text-decoration: none; color: white;" href="/wantedReasons.php">Wanted Reasons</a><br>
-            <a class="text-14-400" style="text-decoration: none; color: white;" href="/houseBans.php">House Bans</a><br>
+            <a class="text-14-400" style="text-decoration: none; color: white;" href="/wantedReasons">Wanted Reasons</a><br>
+            <a class="text-14-400" style="text-decoration: none; color: white;" href="/houseBans">House Bans</a><br>
         </div>
         <div class="grid-d grid-right">
             <p class="text-20-800">Development</p>
