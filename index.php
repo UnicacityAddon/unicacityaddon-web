@@ -49,6 +49,7 @@ $versions = $json_data->versions;
             new google.visualization.PieChart(document.getElementById('donutchart2')).draw(activePlayersData2, options);
         }
     </script>
+    <title>UnicacityWeb</title>
 </head>
 <body>
 
