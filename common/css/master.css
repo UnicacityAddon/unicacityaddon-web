@@ -74,6 +74,7 @@ a.link {
 
 a.link:hover {
     text-decoration-color: #ffffff;
+    cursor: pointer;
 }
 
 .button-download {
@@ -86,6 +87,7 @@ a.link:hover {
 .button-download:hover {
     background-color: var(--darkblue);
     color: var(--lightgray);
+    cursor: pointer;
 }
 
 /*
@@ -140,6 +142,7 @@ a.link:hover {
 .nav-child-right:hover {
     color: #ffffff;
     text-decoration: underline var(--blue) 5px;
+    cursor: pointer;
 }
 
 /*

@@ -27,7 +27,7 @@
 
     $teams = array(
             0 => array(
-                    "name" => "CEO & Developer",
+                    "name" => "CEO",
                     "team" => $ceo,
                     "class" => "ceo"
             ),
@@ -57,8 +57,6 @@
         $teamName = $teamEntry["name"];
         $teamMember = $teamEntry["team"];
         $teamClass = $teamEntry["class"];
-
-        if ($teamName === "Developer") continue;
 
         echo "<p class='text-40-400' style='text-align: center'>" . $teamName . "</p>";
         echo "<div class='team-group'>";
