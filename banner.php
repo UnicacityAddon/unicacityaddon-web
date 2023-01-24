@@ -30,6 +30,18 @@ $bannerFactionArray = array(
         "bannerCount" => $faction->{"Westside Ballas"}
     )
 );
+
+$sprayable = 0;
+$notSprayable = 0;
+
+$sprayedBanners = $json_data->sprayedBanners;
+foreach ($sprayedBanners as $banner) {
+    if ($banner->sprayable) {
+        $sprayable++;
+    } else {
+        $notSprayable++;
+    }
+}
 ?>
 
 <!doctype html>
@@ -53,18 +65,13 @@ $bannerFactionArray = array(
                 [<?php echo "\"" . $bannerFactionArray[5]["name"] . "\", " . $bannerFactionArray[5]["bannerCount"] ?>]
             ]);
 
-            // var bannerTimeData = google.visualization.arrayToDataTable([
-            //     ['Banner', 'Calderon Kartell', 'Kerzakov Familie', 'La Cosa Nostra', 'Le Milieu', 'O\'brien', 'Westside Ballas'],
-            //     ['0', 1000, 1000, 1000, 1000, 1000, 400],
-            //     ['1', 1170, 1000, 1000, 1000, 1000, 460],
-            //     ['2', 660, 1000, 1000, 1000, 1000, 1120],
-            //     ['3', 660, 1000, 1000, 1000, 1000, 1120],
-            //     ['4', 660, 1000, 1000, 1000, 1000, 1120],
-            //     ['5', 660, 1000, 1000, 1000, 1000, 1120],
-            //     ['6', 660, 1000, 1000, 1000, 1000, 1120]
-            // ]);
+            var bannerSprayableData = google.visualization.arrayToDataTable([
+                ['Status', 'Anzahl'],
+                ['übersprühbar', <?php echo $sprayable ?>],
+                ['nicht übersprühbar', <?php echo $notSprayable ?>]
+            ]);
 
-            var optionsBannerFactionData = {
+            var options = {
                 pieHole: 0.4,
                 backgroundColor: 'none',
                 legend: 'none',
@@ -73,15 +80,8 @@ $bannerFactionArray = array(
                 pieSliceBorderColor: 'transparent'
             };
 
-            // var optionsBannerTimeData = {
-            //     backgroundColor: 'none',
-            //     legend: 'none',
-            //     hAxis: {title: 'Stunden', titleTextStyle: {color: '#333'}},
-            //     vAxis: {minValue: 0}
-            // };
-
-            new google.visualization.PieChart(document.getElementById('banner_faction_chart')).draw(bannerFactionData, optionsBannerFactionData);
-            // new google.visualization.AreaChart(document.getElementById('banner_time_chart')).draw(bannerTimeData, optionsBannerTimeData);
+            new google.visualization.PieChart(document.getElementById('banner_faction_chart')).draw(bannerFactionData, options);
+            new google.visualization.PieChart(document.getElementById('banner_sprayable_chart')).draw(bannerSprayableData, options);
         }
     </script>
 </head>
@@ -116,9 +116,23 @@ $bannerFactionArray = array(
                 ?>
             </table>
         </div>
-<!--        <div class="grid-c grid-center">-->
-<!--            <div id="banner_time_chart" style="width: 100%; height: 100%"></div>-->
-<!--        </div>-->
+    </div>
+    <div class="banner-grid">
+        <div class="grid-a grid-center">
+            <div id="banner_sprayable_chart" style="width: 300px; height: 300px"></div>
+        </div>
+        <div class="grid-b">
+            <table style="width: 30%; border: none">
+                <tr>
+                    <td><p class='text-20-400'>Übersprühbar</p></td>
+                    <td><p class='text-20-400' style='text-align: right'><?php echo $sprayable ?></p></td>
+                </tr>
+                <tr>
+                    <td><p class='text-20-400'>Nicht übersprühbar</p></td>
+                    <td><p class='text-20-400' style='text-align: right'><?php echo $notSprayable ?></p></td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 
