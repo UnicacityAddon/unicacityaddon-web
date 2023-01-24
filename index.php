@@ -45,8 +45,8 @@ $versions = $json_data->versions;
                 pieSliceBorderColor: 'transparent'
             };
 
-            new google.visualization.PieChart(document.getElementById('donutchart')).draw(activePlayersData, options);
-            new google.visualization.PieChart(document.getElementById('donutchart2')).draw(activePlayersData2, options);
+            new google.visualization.PieChart(document.getElementById('player_activity_chart')).draw(activePlayersData, options);
+            new google.visualization.PieChart(document.getElementById('version_overview_chart')).draw(activePlayersData2, options);
         }
     </script>
 </head>
@@ -118,10 +118,10 @@ $versions = $json_data->versions;
             </table>
         </div>
         <div class="grid-e grid-center">
-            <div id="donutchart" style="width: 300px; height: 300px"></div>
+            <div id="player_activity_chart" style="width: 300px; height: 300px"></div>
         </div>
         <div class="grid-f grid-center">
-            <div id="donutchart2" style="width: 300px; height: 300px"></div>
+            <div id="version_overview_chart" style="width: 300px; height: 300px"></div>
         </div>
     </div>
 </div>
