@@ -17,9 +17,9 @@
 
 @keyframes comeIn {from {opacity: 0;} to {opacity: 100%;}}
 
-body, h2, p {
-    margin: 0;
-}
+html {scroll-behavior: smooth;}
+
+body, h2, p {margin: 0;}
 
 body {
     padding: 0;
@@ -225,6 +225,27 @@ a.link:hover {
     right: 0;
     width: 320px;
     margin: auto;
+}
+
+@-webkit-keyframes moveUpDown {
+    0%   {top: 92vh;}
+    50%  {top: 90vh;}
+    100% {top: 92vh;}
+}
+
+.arrow {
+    position: absolute;
+    left: 50%;
+    top: 92vh;
+    transform: translate(-50%, -50%);
+    width: 75px;
+    height: 65px;
+    fill: white;
+    animation: moveUpDown 0.6s 3;
+}
+
+.arrow:hover {
+    fill: lightgray;
 }
 
 /*
