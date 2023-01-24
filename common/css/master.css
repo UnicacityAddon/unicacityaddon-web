@@ -192,7 +192,7 @@ a.link:hover {
     background-color: transparent;
 }
 
-.index-statistic-grid, .index-history-grid, .footer-grid {
+.index-statistic-grid, .index-history-grid, .banner-grid, .footer-grid {
     position: relative;
     display: grid;
     margin: 0 10vw;
@@ -237,13 +237,14 @@ a.link:hover {
 ==============================================================================================================
 */
 
-.wantedReasons, .housebans, .team {
+.wantedReasons, .housebans, .team, .banner {
     position: relative;
+    min-height: calc(100vh - 350px);
     margin: 10vh 10vw;
     z-index: 0;
 }
 
-.wantedReasons > p, .housebans > p, .team > p {
+.wantedReasons > p, .housebans > p, .team > p, .banner > p {
     margin: 25px 0;
     color: white;
 }
@@ -309,6 +310,20 @@ a.link:hover {
 .team-group-entry.mod {border: 1px solid var(--blue);}
 .team-group-entry.sup {border: 1px solid var(--orange);}
 .team-group-entry.bet {border: 1px solid var(--pink);}
+
+.banner-grid {
+    height: 100%;
+    margin: 0;
+    justify-content: stretch;
+    grid-template-columns: 300px auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-areas:
+        "a b"
+        "c c";
+}
+
+.banner-grid > .grid-b {align-self: center;}
 
 /*
 ==============================================================================================================
