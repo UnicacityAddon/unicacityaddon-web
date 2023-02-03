@@ -336,15 +336,15 @@ a.link:hover {
     height: 100%;
     margin: 0;
     justify-content: stretch;
-    grid-template-columns: 300px auto;
-    grid-column-gap: 20px;
+    grid-template-columns: 300px auto 300px auto;
+    grid-column-gap: 50px;
     grid-row-gap: 20px;
     grid-template-areas:
-        "a b"
-        "c c";
+        "a b c d"
+        "e e e e";
 }
 
-.banner-grid > .grid-b {align-self: center;}
+.banner-grid > .grid-b, .banner-grid > .grid-d {align-self: center;}
 
 /*
 ==============================================================================================================

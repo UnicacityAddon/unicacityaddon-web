@@ -15,8 +15,7 @@
 <div class="wantedReasons">
     <p class="text-50-700">Wanted Reasons</p>
     <?php
-    $api_url = 'http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/wantedreason';
-    $json_data = json_decode(file_get_contents($api_url));
+    $json_data = json_decode(file_get_contents('http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/wantedreason'));
 
     $count = 0;
     foreach ($json_data as $entry) {

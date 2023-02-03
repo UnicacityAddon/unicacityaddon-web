@@ -1,6 +1,5 @@
 <?php
-$api_url = 'http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/banner';
-$json_data = json_decode(file_get_contents($api_url));
+$json_data = json_decode(file_get_contents('http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/banner'));
 
 $faction = $json_data->faction;
 
