@@ -41,6 +41,8 @@ foreach ($sprayedBanners as $banner) {
         $notSprayable++;
     }
 }
+
+$history = $json_data->history;
 ?>
 
 <!doctype html>
@@ -70,7 +72,31 @@ foreach ($sprayedBanners as $banner) {
                 ['nicht übersprühbar', <?php echo $notSprayable ?>]
             ]);
 
-            var options = {
+            var bannerHistoryData = google.visualization.arrayToDataTable([
+                ['Vor Stunden', 'Calderon Kartell', 'Kerzakov Familie', 'La Cosa Nostra', 'Le Milieu', 'O\'brien', 'Westside Ballas'],
+
+                <?php
+                for ($i = count($history) - 1; $i > 0; $i--) {
+                    echo "[" . $i .
+                        ", " . $history[$i]->{$i}->{"Calderon Kartell"} .
+                        ", " . $history[$i]->{$i}->{"Kerzakov Familie"} .
+                        ", " . $history[$i]->{$i}->{"La Cosa Nostra"} .
+                        ", " . $history[$i]->{$i}->{"Le Milieu"} .
+                        ", " . $history[$i]->{$i}->{"O'brien"} .
+                        ", " . $history[$i]->{$i}->{"Westside Ballas"} .
+                        "],";
+                }
+                echo "[0, " . $history[0]->{0}->{"Calderon Kartell"} .
+                    ", " . $history[0]->{0}->{"Kerzakov Familie"} .
+                    ", " . $history[0]->{0}->{"La Cosa Nostra"} .
+                    ", " . $history[0]->{0}->{"Le Milieu"} .
+                    ", " . $history[0]->{0}->{"O'brien"} .
+                    ", " . $history[0]->{0}->{"Westside Ballas"} .
+                    "]";
+                ?>
+            ]);
+
+            var optionsPieChart = {
                 pieHole: 0.4,
                 backgroundColor: 'none',
                 legend: 'none',
@@ -79,8 +105,50 @@ foreach ($sprayedBanners as $banner) {
                 pieSliceBorderColor: 'transparent'
             };
 
-            new google.visualization.PieChart(document.getElementById('banner_faction_chart')).draw(bannerFactionData, options);
-            new google.visualization.PieChart(document.getElementById('banner_sprayable_chart')).draw(bannerSprayableData, options);
+            var optionsAreaChart = {
+                isStacked: false,
+                height: 300,
+                backgroundColor: 'transparent',
+                legend: {
+                    position: 'top',
+                    maxLines: 3,
+                    textStyle: {
+                        color: '#ffffff',
+                    }
+                },
+                chartArea: {
+                    left: 70,
+                    top: 70,
+                    width: '100%'
+                },
+                hAxis: {
+                    gridlines: '#ffffff',
+                    baselineColor: '#ffffff',
+                    title: 'vor Stunden',
+                    titleTextStyle: {
+                        color: '#ffffff'
+                    },
+                    textStyle: {
+                        color: '#ffffff',
+                    },
+                    direction: -1
+                },
+                vAxis: {
+                    gridlines: '#ffffff',
+                    baselineColor: '#ffffff',
+                    title: 'Anzahl',
+                    titleTextStyle: {
+                        color: '#ffffff'
+                    },
+                    textStyle: {
+                        color: '#ffffff',
+                    }
+                }
+            };
+
+            new google.visualization.PieChart(document.getElementById('banner_faction_chart')).draw(bannerFactionData, optionsPieChart);
+            new google.visualization.PieChart(document.getElementById('banner_sprayable_chart')).draw(bannerSprayableData, optionsPieChart);
+            new google.visualization.AreaChart(document.getElementById('banner_history_chart')).draw(bannerHistoryData, optionsAreaChart);
         }
     </script>
 </head>
@@ -100,7 +168,7 @@ foreach ($sprayedBanners as $banner) {
             <div id="banner_faction_chart" style="width: 300px; height: 300px"></div>
         </div>
         <div class="grid-b">
-            <table style="width: 30%; border: none">
+            <table style="width: 100%; border: none">
                 <?php
                 foreach ($bannerFactionArray as $bannerEntry) {
                     $factionName = $bannerEntry["name"];
@@ -115,13 +183,11 @@ foreach ($sprayedBanners as $banner) {
                 ?>
             </table>
         </div>
-    </div>
-    <div class="banner-grid">
-        <div class="grid-a grid-center">
+        <div class="grid-c grid-center">
             <div id="banner_sprayable_chart" style="width: 300px; height: 300px"></div>
         </div>
-        <div class="grid-b">
-            <table style="width: 30%; border: none">
+        <div class="grid-d">
+            <table style="width: 100%; border: none">
                 <tr>
                     <td><p class='text-20-400'>Übersprühbar</p></td>
                     <td><p class='text-20-400' style='text-align: right'><?php echo $sprayable ?></p></td>
@@ -131,6 +197,9 @@ foreach ($sprayedBanners as $banner) {
                     <td><p class='text-20-400' style='text-align: right'><?php echo $notSprayable ?></p></td>
                 </tr>
             </table>
+        </div>
+        <div class="grid-e">
+            <div id="banner_history_chart" style="width: 100%;"></div>
         </div>
     </div>
 </div>
