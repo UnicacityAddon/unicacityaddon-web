@@ -7,7 +7,7 @@
     --darkblue: #416ba1;
     --lightgray: #d3d3d3;
     --gray: #808080;
-    --darkgray: #3f3f3f;
+    --darkgray: #2f2f2f;
     --lightgreen: #00ad06;
     --green: #135d09;
     --red: #e43b3b;
@@ -192,7 +192,7 @@ a.link:hover {
     background-color: transparent;
 }
 
-.index-statistic-grid, .index-history-grid, .banner-grid, .footer-grid {
+.index-statistic-grid, .index-history-grid, .banner-grid, .gangwar-grid, .dashboard-grid, .footer-grid {
     position: relative;
     display: grid;
     margin: 0 10vw;
@@ -258,14 +258,14 @@ a.link:hover {
 ==============================================================================================================
 */
 
-.wantedReasons, .housebans, .team, .banner {
+.wantedReasons, .housebans, .team, .banner, .gangwar, .dashboard {
     position: relative;
-    min-height: calc(100vh - 350px);
+    min-height: 80vh;
     margin: 10vh 10vw;
     z-index: 0;
 }
 
-.wantedReasons > p, .housebans > p, .team > p, .banner > p {
+.wantedReasons > p, .housebans > p, .team > p, .banner > p, .dashboard > p {
     margin: 25px 0;
     color: white;
 }
@@ -342,6 +342,18 @@ a.link:hover {
     grid-template-areas:
         "a b c d"
         "e e e e";
+}
+
+.gangwar-grid {
+    height: 100%;
+    margin: 0;
+    justify-content: stretch;
+    grid-template-columns: auto;
+    grid-column-gap: 50px;
+    grid-row-gap: 20px;
+    grid-template-areas:
+        "a b c"
+        "d e f";
 }
 
 .banner-grid > .grid-b, .banner-grid > .grid-d {align-self: center;}
