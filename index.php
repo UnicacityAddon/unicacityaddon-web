@@ -68,7 +68,7 @@ $versions = $json_data->versions;
             and nice-to-have features and utilities for everyday gameplay.
         </p>
         <p class="text-50-700" style="color: var(--blue);">#improveYourGame</p>
-        <a href="https://github.com/rettichlp/unicacityaddon-addon/releases/download/v<?php echo $latestVersion ?>/UnicacityAddon-<?php echo $latestVersion ?>.jar">
+        <a href="https://github.com/UnicacityAddon/unicacityaddon-addon/releases/download/v<?php echo $latestVersion ?>/UnicacityAddon-<?php echo $latestVersion ?>.jar">
             <button class="button-download">Download</button>
         </a>
     </div>
