@@ -7,17 +7,19 @@
     --darkblue: #416ba1;
     --lightgray: #d3d3d3;
     --gray: #808080;
-    --darkgray: #3f3f3f;
+    --darkgray: #2f2f2f;
     --lightgreen: #00ad06;
-    --darkgreen: #105306;
+    --green: #135d09;
     --red: #e43b3b;
+    --orange: #e46e3b;
+    --pink: #d93be4;
 }
 
 @keyframes comeIn {from {opacity: 0;} to {opacity: 100%;}}
 
-body, h2, p {
-    margin: 0;
-}
+html {scroll-behavior: smooth;}
+
+body, h2, p {margin: 0;}
 
 body {
     padding: 0;
@@ -72,6 +74,7 @@ a.link {
 
 a.link:hover {
     text-decoration-color: #ffffff;
+    cursor: pointer;
 }
 
 .button-download {
@@ -84,6 +87,7 @@ a.link:hover {
 .button-download:hover {
     background-color: var(--darkblue);
     color: var(--lightgray);
+    cursor: pointer;
 }
 
 /*
@@ -138,6 +142,7 @@ a.link:hover {
 .nav-child-right:hover {
     color: #ffffff;
     text-decoration: underline var(--blue) 5px;
+    cursor: pointer;
 }
 
 /*
@@ -187,7 +192,7 @@ a.link:hover {
     background-color: transparent;
 }
 
-.index-statistic-grid, .index-history-grid, .footer-grid {
+.index-statistic-grid, .index-history-grid, .banner-grid, .gangwar-grid, .dashboard-grid, .footer-grid {
     position: relative;
     display: grid;
     margin: 0 10vw;
@@ -222,6 +227,27 @@ a.link:hover {
     margin: auto;
 }
 
+@-webkit-keyframes moveUpDown {
+    0%   {top: 92vh;}
+    50%  {top: 90vh;}
+    100% {top: 92vh;}
+}
+
+.arrow {
+    position: absolute;
+    left: 50%;
+    top: 92vh;
+    transform: translate(-50%, -50%);
+    width: 75px;
+    height: 65px;
+    fill: white;
+    animation: moveUpDown 0.6s 3;
+}
+
+.arrow:hover {
+    fill: lightgray;
+}
+
 /*
 ==============================================================================================================
   ____  _   _ ____  ____   _    ____ _____ ____
@@ -232,13 +258,14 @@ a.link:hover {
 ==============================================================================================================
 */
 
-.wantedReasons, .housebans {
+.wantedReasons, .housebans, .team, .banner, .gangwar, .dashboard {
     position: relative;
+    min-height: 80vh;
     margin: 10vh 10vw;
     z-index: 0;
 }
 
-.wantedReasons p, .housebans p {
+.wantedReasons > p, .housebans > p, .team > p, .banner > p, .dashboard > p {
     margin: 25px 0;
     color: white;
 }
@@ -278,6 +305,59 @@ a.link:hover {
     width: max-content;
 }
 
+.team-group {
+    display: grid;
+    grid-row-gap: 25px;
+    grid-column-gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%/1, max(64px, 100%/5)), 302px));
+    margin-bottom: 50px;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.team-group-entry {
+    width: 250px;
+    max-height: 100%;
+    text-align: center;
+    color: white;
+    background-color: rgba(0,0, 0, 0.5);
+    padding: 25px;
+    border-radius: 5px;
+}
+
+.team-group-entry img {border-radius: 5px;}
+.team-group-entry.ceo {border: 1px solid var(--red);}
+.team-group-entry.dev {border: 1px solid var(--green);}
+.team-group-entry.mod {border: 1px solid var(--blue);}
+.team-group-entry.sup {border: 1px solid var(--orange);}
+.team-group-entry.bet {border: 1px solid var(--pink);}
+
+.banner-grid {
+    height: 100%;
+    margin: 0;
+    justify-content: stretch;
+    grid-template-columns: 300px auto 300px auto;
+    grid-column-gap: 50px;
+    grid-row-gap: 20px;
+    grid-template-areas:
+        "a b c d"
+        "e e e e";
+}
+
+.gangwar-grid {
+    height: 100%;
+    margin: 0;
+    justify-content: stretch;
+    grid-template-columns: auto;
+    grid-column-gap: 50px;
+    grid-row-gap: 20px;
+    grid-template-areas:
+        "a b c"
+        "d e f";
+}
+
+.banner-grid > .grid-b, .banner-grid > .grid-d {align-self: center;}
+
 /*
 ==============================================================================================================
   _____ ___   ___ _____ _____ ____
@@ -289,7 +369,7 @@ a.link:hover {
 */
 
 .footer-grid {
-    grid-template-columns: 28vw repeat(4, 12vw);
+    grid-template-columns: 20vw repeat(4, 14vw);
     grid-column-gap: 1vw;
     grid-row-gap: 1vw;
     grid-template-areas:

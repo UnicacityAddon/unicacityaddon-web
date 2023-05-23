@@ -15,8 +15,7 @@
 <div class="housebans">
     <p class="text-50-700">House Bans</p>
     <?php
-    $api_url = 'http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/houseban?advanced=false';
-    $json_data = json_decode(file_get_contents($api_url));
+    $json_data = json_decode(file_get_contents('http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/houseban?advanced=false'));
 
     $count = 0;
     foreach ($json_data as $entry) {

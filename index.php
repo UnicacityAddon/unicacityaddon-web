@@ -1,6 +1,5 @@
 <?php
-$api_url = 'http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/mgmt';
-$json_data = json_decode(file_get_contents($api_url));
+$json_data = json_decode(file_get_contents('http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/mgmt'));
 
 $activeClients = $json_data->activeClients;
 $totalClients = $json_data->totalClients;
@@ -45,8 +44,8 @@ $versions = $json_data->versions;
                 pieSliceBorderColor: 'transparent'
             };
 
-            new google.visualization.PieChart(document.getElementById('donutchart')).draw(activePlayersData, options);
-            new google.visualization.PieChart(document.getElementById('donutchart2')).draw(activePlayersData2, options);
+            new google.visualization.PieChart(document.getElementById('player_activity_chart')).draw(activePlayersData, options);
+            new google.visualization.PieChart(document.getElementById('version_overview_chart')).draw(activePlayersData2, options);
         }
     </script>
 </head>
@@ -69,13 +68,23 @@ $versions = $json_data->versions;
             and nice-to-have features and utilities for everyday gameplay.
         </p>
         <p class="text-50-700" style="color: var(--blue);">#improveYourGame</p>
-        <a href="https://github.com/rettichlp/UnicacityAddon-1.12.2/releases/download/v<?php echo $latestVersion ?>/UnicacityAddon-<?php echo $latestVersion ?>.jar">
+        <a href="https://github.com/UnicacityAddon/unicacityaddon-addon/releases/download/v<?php echo $latestVersion ?>/UnicacityAddon-<?php echo $latestVersion ?>.jar">
             <button class="button-download">Download</button>
         </a>
     </div>
 </div>
 
-<div class="index-statistic">
+<a href="#index-statistic">
+    <div class="arrow">
+        <svg>
+            <polygon points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "/>
+            <polygon points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "/>
+            <polygon points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "/>
+        </svg>
+    </div>
+</a>
+
+<div id="index-statistic" class="index-statistic">
     <div class="index-statistic-grid">
         <div class="grid-a grid-center">
             <h2>Statistiken</h2>
@@ -118,10 +127,10 @@ $versions = $json_data->versions;
             </table>
         </div>
         <div class="grid-e grid-center">
-            <div id="donutchart" style="width: 300px; height: 300px"></div>
+            <div id="player_activity_chart" style="width: 300px; height: 300px"></div>
         </div>
         <div class="grid-f grid-center">
-            <div id="donutchart2" style="width: 300px; height: 300px"></div>
+            <div id="version_overview_chart" style="width: 300px; height: 300px"></div>
         </div>
     </div>
 </div>
