@@ -1,7 +1,7 @@
 <div class="footer">
     <div class="footer-grid">
         <div class="grid-a">
-            <img src="/common/img/UCLogo.png" height="100px" alt="Unicacity Logo">
+            <img src="/common/img/UCLogo_new.png" height="100px" alt="Unicacity Logo">
         </div>
         <div class="grid-b grid-right">
             <p class="text-20-800">Support</p>
