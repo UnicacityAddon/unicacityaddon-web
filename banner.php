@@ -58,12 +58,12 @@ $history = $json_data->history;
         function drawChart() {
             var bannerFactionData = google.visualization.arrayToDataTable([
                 ['Fraktion', 'Anzahl'],
-                [<?php echo "\"" . $bannerFactionArray[0]["name"] . "\", " . $bannerFactionArray[0]["bannerCount"] ?>],
-                [<?php echo "\"" . $bannerFactionArray[1]["name"] . "\", " . $bannerFactionArray[1]["bannerCount"] ?>],
-                [<?php echo "\"" . $bannerFactionArray[2]["name"] . "\", " . $bannerFactionArray[2]["bannerCount"] ?>],
-                [<?php echo "\"" . $bannerFactionArray[3]["name"] . "\", " . $bannerFactionArray[3]["bannerCount"] ?>],
-                [<?php echo "\"" . $bannerFactionArray[4]["name"] . "\", " . $bannerFactionArray[4]["bannerCount"] ?>],
-                [<?php echo "\"" . $bannerFactionArray[5]["name"] . "\", " . $bannerFactionArray[5]["bannerCount"] ?>]
+                [<?php echo "\"" . $bannerFactionArray[3]["name"] . "\", " . $bannerFactionArray[3]["bannerCount"] ?>], // blue
+                [<?php echo "\"" . $bannerFactionArray[1]["name"] . "\", " . $bannerFactionArray[1]["bannerCount"] ?>], // red
+                [<?php echo "\"" . $bannerFactionArray[0]["name"] . "\", " . $bannerFactionArray[0]["bannerCount"] ?>], // yellow
+                [<?php echo "\"" . $bannerFactionArray[4]["name"] . "\", " . $bannerFactionArray[4]["bannerCount"] ?>], // green
+                [<?php echo "\"" . $bannerFactionArray[5]["name"] . "\", " . $bannerFactionArray[5]["bannerCount"] ?>], // purple
+                [<?php echo "\"" . $bannerFactionArray[2]["name"] . "\", " . $bannerFactionArray[2]["bannerCount"] ?>] // cyan
             ]);
 
             var bannerSprayableData = google.visualization.arrayToDataTable([
@@ -73,25 +73,25 @@ $history = $json_data->history;
             ]);
 
             var bannerHistoryData = google.visualization.arrayToDataTable([
-                ['Vor Stunden', 'Calderon Kartell', 'Kerzakov Familie', 'La Cosa Nostra', 'Le Milieu', 'O\'brien', 'Westside Ballas'],
+                ['Vor Stunden', 'Le Milieu', 'Kerzakov Familie', 'Calderon Kartell', 'O\'brien', 'Westside Ballas', 'La Cosa Nostra'],
 
                 <?php
                 for ($i = count($history) - 1; $i > 0; $i--) {
                     echo "[" . $i .
-                        ", " . $history[$i]->{$i}->{"Calderon Kartell"} .
-                        ", " . $history[$i]->{$i}->{"Kerzakov Familie"} .
-                        ", " . $history[$i]->{$i}->{"La Cosa Nostra"} .
                         ", " . $history[$i]->{$i}->{"Le Milieu"} .
+                        ", " . $history[$i]->{$i}->{"Kerzakov Familie"} .
+                        ", " . $history[$i]->{$i}->{"Calderon Kartell"} .
                         ", " . $history[$i]->{$i}->{"O'brien"} .
                         ", " . $history[$i]->{$i}->{"Westside Ballas"} .
+                        ", " . $history[$i]->{$i}->{"La Cosa Nostra"} .
                         "],";
                 }
-                echo "[0, " . $history[0]->{0}->{"Calderon Kartell"} .
+                echo "[0, " . $history[0]->{0}->{"Le Milieu"} .
                     ", " . $history[0]->{0}->{"Kerzakov Familie"} .
-                    ", " . $history[0]->{0}->{"La Cosa Nostra"} .
-                    ", " . $history[0]->{0}->{"Le Milieu"} .
+                    ", " . $history[0]->{0}->{"Calderon Kartell"} .
                     ", " . $history[0]->{0}->{"O'brien"} .
                     ", " . $history[0]->{0}->{"Westside Ballas"} .
+                    ", " . $history[0]->{0}->{"La Cosa Nostra"} .
                     "]";
                 ?>
             ]);
