@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <?php include "common/php/head.php"; ?>
-    <title>Team | UCA</title>
+    <title>Gangwar | UCA</title>
     <meta http-equiv="refresh" content="10">
 </head>
 <body style="background-color: var(--darkgray)">
