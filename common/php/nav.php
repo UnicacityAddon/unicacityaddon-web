@@ -10,7 +10,6 @@ $latestVersion = $json_data->latestVersion;
     <a class="nav-child nav-child-right text-20-400" href="/wantedReasons">Wanted Reasons</a>
     <a class="nav-child nav-child-right text-20-400" href="/team">Team</a>
     <a class="nav-child nav-child-right text-20-400" href="https://wiki.unicacityaddon.rettichlp.de/">Wiki</a>
-    <a class="nav-child nav-child-right text-20-400" href="https://github.com/UnicacityAddon/unicacityaddon-addon/releases/latest">What's new?</a>
-    <a class="nav-child nav-child-right text-20-400" href="https://github.com/UnicacityAddon/unicacityaddon-addon/tree/main">Code</a>
+    <a class="nav-child nav-child-right text-20-400" href="https://github.com/UnicacityAddon/unicacityaddon-addon/tree/main">GitHub</a>
     <a class="nav-child nav-child-left text-20-800" href="/">UnicacityAddon</a>
 </nav>
