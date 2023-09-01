@@ -16,6 +16,7 @@
             <a class="text-14-400" style="text-decoration: none; color: white;" href="/wantedReasons">Wanted Reasons</a><br>
             <a class="text-14-400" style="text-decoration: none; color: white;" href="/houseBans">House Bans</a><br>
             <a class="text-14-400" style="text-decoration: none; color: white;" href="/banner">Banner</a><br>
+            <a class="text-14-400" style="text-decoration: none; color: white;" href="/player">Spieler</a><br>
             <a class="text-14-400" style="text-decoration: none; color: white;" href="/gangwar">Gangwar</a><br>
         </div>
         <div class="grid-d grid-right">
