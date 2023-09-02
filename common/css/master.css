@@ -192,7 +192,7 @@ a.link:hover {
     background-color: transparent;
 }
 
-.index-statistic-grid, .index-history-grid, .banner-grid, .gangwar-grid, .dashboard-grid, .footer-grid {
+.index-statistic-grid, .index-history-grid, .banner-grid, .gangwar-grid, .dashboard-grid, .player-grid-search, .player-grid, .footer-grid {
     position: relative;
     display: grid;
     margin: 0 10vw;
@@ -258,14 +258,14 @@ a.link:hover {
 ==============================================================================================================
 */
 
-.wantedReasons, .housebans, .team, .banner, .gangwar, .dashboard {
+.wantedReasons, .housebans, .team, .banner, .gangwar, .player, .dashboard {
     position: relative;
     min-height: 80vh;
     margin: 10vh 10vw;
     z-index: 0;
 }
 
-.wantedReasons > p, .housebans > p, .team > p, .banner > p, .dashboard > p {
+.wantedReasons > p, .housebans > p, .team > p, .banner > p, .player > p, .dashboard > p {
     margin: 25px 0;
     color: white;
 }
@@ -320,7 +320,7 @@ a.link:hover {
     max-height: 100%;
     text-align: center;
     color: white;
-    background-color: rgba(0,0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 25px;
     border-radius: 5px;
 }
@@ -357,6 +357,36 @@ a.link:hover {
 }
 
 .banner-grid > .grid-b, .banner-grid > .grid-d {align-self: center;}
+
+.player-grid-search {
+    height: 100%;
+    margin: 0;
+    justify-content: stretch;
+    grid-template-columns: auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-areas:
+        "a a a a a a";
+}
+
+.player-grid {
+    height: 100%;
+    margin: 0;
+    justify-content: stretch;
+    grid-template-columns: auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-areas:
+        "a a a b b b"
+        "c c d d e e";
+}
+
+.player-grid-search > .grid-white-border, .player-grid > .grid-white-border {
+    border: 1px solid white;
+    border-radius: 1em;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
 /*
 ==============================================================================================================
