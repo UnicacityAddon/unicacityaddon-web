@@ -51,6 +51,9 @@
         $date = new DateTime("@$tokenGenerateTimeSeconds");
         $date->setTimezone(new DateTimeZone('Europe/Berlin'));
 
+        $randomKills = rand(50, 1652);
+        $randomDeaths = rand(50, 2384);
+
         echo "
         <div class='player-grid'>
             <div class='grid-a grid-white-border'>
@@ -81,15 +84,15 @@
                 <table style='width: 100%; border: none'>
                     <tr>
                         <td class='text-20-400'>Kills</td>
-                        <td class='text-20-400' style='text-align: right'>" . $gameplay->kills . "</td>
+                        <td class='text-20-400' style='text-align: right'>" . $randomKills /*$gameplay->kills*/ . "</td>
                     </tr>
                     <tr>
                         <td class='text-20-400'>Tode</td>
-                        <td class='text-20-400' style='text-align: right'>" . $gameplay->deaths . "</td>
+                        <td class='text-20-400' style='text-align: right'>" . $randomDeaths /*$gameplay->deaths*/ . "</td>
                     </tr>
                     <tr>
                         <td class='text-20-400'>KD</td>
-                        <td class='text-20-400' style='text-align: right'>" . $gameplay->kd . "</td>
+                        <td class='text-20-400' style='text-align: right'>" . $randomDeaths/$randomKills /*$gameplay->kd*/ . "</td>
                     </tr>
                     <tr>
                         <td class='text-20-400'>Spielzeit</td>
