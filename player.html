@@ -1,16 +1,23 @@
 <!doctype html>
 <html lang="de">
 <head>
-    <?php include "common/php/head.php"; ?>
     <title>Spieler | UCA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=chrome">
+    <link rel="shortcut icon" href="common/img/UCLogo_new.png" type="image/x-icon">
+    <link rel="stylesheet" href="common/css/master.css">
+    <link rel="stylesheet" href="common/css/font.css">
+    <script src="common/js/master.js"></script>
 </head>
 <body>
+
+<nav id="nav"></nav>
 
 <video autoplay muted loop id="backgroundVideo">
     <source src="common/img/UnicacityAddonWebsiteBackground.mp4" type="video/mp4">
 </video>
-
-<?php include "common/php/nav.php"; ?>
 
 <div class="player">
     <p class="text-50-700">Spieler</p>
@@ -172,7 +179,7 @@
     ?>
 </div>
 
-<?php include "common/php/footer.php"; ?>
+<div id="footer"></div>
 
 </body>
 </html>

@@ -119,7 +119,7 @@ a.link:hover {
 ==============================================================================================================
 */
 
-.nav {
+#nav {
     position: fixed;
     top: 0;
     width: 100%;
@@ -176,7 +176,7 @@ a.link:hover {
     line-height: 1;
 }
 
-.index-statistic, .index-history, .footer {
+.index-statistic, .index-history, #footer {
     position: relative;
     z-index: 0;
     box-shadow:
