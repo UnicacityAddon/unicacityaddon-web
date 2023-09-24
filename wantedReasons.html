@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <title>Wanted Reasons | UCA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=chrome">
+    <link rel="shortcut icon" href="common/img/UCLogo_new.png" type="image/x-icon">
+    <link rel="stylesheet" href="common/css/master.css">
+    <link rel="stylesheet" href="common/css/font.css">
+    <script src="common/js/master.js" async></script>
+</head>
+<body>
+
+<nav id="nav"></nav>
+
+<video autoplay muted loop id="backgroundVideo">
+    <source src="common/img/UnicacityAddonWebsiteBackground.mp4" type="video/mp4">
+</video>
+
+<div class="wantedReasons">
+    <p class="text-50-700">Wanted Reasons</p>
+    <div id="content"></div>
+</div>
+
+<div id="footer"></div>
+
+</body>
+</html>
+
+<script>
+    async function fetchAndDisplayContent() {
+        try {
+            // const response = await fetch('http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/wantedreason');
+            const json = JSON.parse('[{"reason":"Massenmord","points":69},{"reason":"Pfandnahme","points":65},{"reason":"Doppelmord","points":65},{"reason":"Terrorismus","points":65},{"reason":"Mord","points":60},{"reason":"Grob-fahrlässiges-Überfahren-eines-anderen-Verkehrsteilnehmers-mit-anschließender-Fahrerflucht","points":55},{"reason":"Versuchter-Mord","points":55},{"reason":"Brandstiftung","points":55},{"reason":"Grob-fahrlässiges-Überfahren-eines-anderen-Verkehrsteilnehmers","points":55},{"reason":"Unterlassene-Hilfeleistung-mit-anschließender-Todesfolge","points":50},{"reason":"Gebietsbesetzung","points":50},{"reason":"Einbruch-in-Hochsicherheitsräume","points":50},{"reason":"Besitz-von-Betäubungsmitteln-(über-50-Gramm)","points":45},{"reason":"Schwerer-Diebstahl","points":45},{"reason":"Umverteilung-der-Persönlichkeitsrechte","points":45},{"reason":"Sperrgebiet","points":45},{"reason":"Amtsanmaßung","points":40},{"reason":"Besitz-von-Betäubungsmitteln-(41-bis-50-Gramm)","points":40},{"reason":"Räuberische-Erpressung","points":40},{"reason":"Schwerer-Hausfriedensbruch","points":40},{"reason":"Leichenbewachung","points":40},{"reason":"Maskieren-in-der-Öffentlichkeit","points":40},{"reason":"Freiheitsberaubung","points":40},{"reason":"Schutz-eines-hochgradig-Gesuchten","points":40},{"reason":"Herstellung-von-Betäubungsmitteln","points":40},{"reason":"Bilden-bewaffneter-Gruppen","points":35},{"reason":"Besitz-von-Betäubungsmitteln-(31-bis-40-Gramm)","points":35},{"reason":"Schwere-Körperverletzung","points":35},{"reason":"Raub","points":35},{"reason":"Nachstellung","points":35},{"reason":"Entziehung-der-staatlichen-Gewalt","points":35},{"reason":"Volksverhetzung","points":35},{"reason":"Tierquälerei","points":35},{"reason":"Diebstahl","points":30},{"reason":"Besitz-von-Betäubungsmitteln-(21-bis-30-Gramm)","points":30},{"reason":"Handeln-mit-Betäubungsmitteln","points":30},{"reason":"Erpressung","points":30},{"reason":"Hausfriedensbruch","points":30},{"reason":"Illegale-Werbung","points":30},{"reason":"Rufmord","points":30},{"reason":"Waffenbesitz-ohne-Waffenschein","points":30},{"reason":"Unfähigkeit-zum-Ausweisen-der-Identität-oder-Lizenzen","points":25},{"reason":"Unterlassene-Hilfeleistung","points":25},{"reason":"Entsagung-von-Anordnungen","points":25},{"reason":"Vandalismus","points":25},{"reason":"Drohung","points":25},{"reason":"Betrug","points":25},{"reason":"Belästigung","points":25},{"reason":"Besitz-von-Betäubungsmitteln-(11-bis-20-Gramm)","points":25},{"reason":"Nötigung","points":25},{"reason":"Sachbeschädigung","points":25},{"reason":"Anstößiges-Verhalten-in-der-Öffentlichkeit","points":25},{"reason":"Leichte-Körperverletzung","points":25},{"reason":"Missbrauch-von-Notrufen","points":20},{"reason":"Weiterverkauf-geschützter-Literatur","points":20},{"reason":"Zahlungsunfähigkeit-bei-einem-Bußgeldbescheid","points":20},{"reason":"Beteiligung-an-einer-Schlägerei","points":20},{"reason":"Besitz-von-Betäubungsmitteln-(1-bis-10-Gramm)","points":20},{"reason":"Beleidigung","points":20},{"reason":"Störung-der-Religionsausübung","points":20},{"reason":"Lärmbelästigung","points":20},{"reason":"Gaffen","points":20},{"reason":"Unterschlagung","points":15},{"reason":"Umweltverschmutzung","points":15},{"reason":"Angeln-ohne-Angelschein","points":10},{"reason":"Untersuchungshaft","points":1},{"reason":"Nachzahlen-eines-Bußgeldbescheides","points":1}]');// await response.json();
+
+            let count = 0;
+
+            const contentElement = document.getElementById("content");
+
+            json.forEach(entry => {
+                const reason = entry.reason.replace("-", " ");
+                const points = entry.points;
+                const color = count++ % 2 === 1 ? "rgba(0, 0, 0, 0.5)" : "";
+
+                const wantedReasonsFlexBar = document.createElement('div');
+                wantedReasonsFlexBar.classList.add('wantedReasons-flexBar');
+                wantedReasonsFlexBar.style.backgroundColor = color;
+                wantedReasonsFlexBar.style.padding = '0 10px';
+
+                const reasonElement = document.createElement('div');
+                reasonElement.classList.add('text-20-300');
+                reasonElement.textContent = reason;
+
+                const pointsElement = document.createElement('div');
+                pointsElement.classList.add('text-20-300');
+                pointsElement.textContent = points;
+
+                wantedReasonsFlexBar.appendChild(reasonElement);
+                wantedReasonsFlexBar.appendChild(pointsElement);
+
+                contentElement.appendChild(wantedReasonsFlexBar);
+            });
+        } catch (error) {
+            console.error('Cannot fetch data:', error);
+        }
+    }
+</script>
