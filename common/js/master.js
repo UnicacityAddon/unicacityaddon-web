@@ -11,7 +11,7 @@ window.onload = async function() {
     const downloadLink = await getDownloadLink();
 
     document.getElementById('nav').innerHTML = `
-        <a class="nav-child nav-child-right text-20-400" id="downloadLink" href=${downloadLink}>Download</a>
+        <a class="nav-child nav-child-right text-20-400" href=${downloadLink}>Download</a>
         <span class="nav-child text-20-400" style="float: right"> | </span>
         <a class="nav-child nav-child-right text-20-400" href="/player">Spieler</a>
         <a class="nav-child nav-child-right text-20-400" href="/banner">Banner</a>
@@ -55,7 +55,7 @@ window.onload = async function() {
                 <a class="text-14-400" style="text-decoration: none; color: white;" href="https://www.labymod.net/de/download">Labymod 4</a><br>
             </div>
             <div class="grid-f grid-right">
-                <p  class="text-14-400" style="color: var(--gray)">UnicacityAddon<br>© <?php echo date("Y"); ?> RettichLP and Dimiikou</p>
+                <p  class="text-14-400" style="color: var(--gray)">UnicacityAddon<br>© ${new Date().getFullYear()} RettichLP and Dimiikou</p>
             </div>
         </div>`;
 
