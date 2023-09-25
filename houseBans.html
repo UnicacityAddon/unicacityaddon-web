@@ -49,8 +49,6 @@
                 entry.houseBanReasonList.forEach(subEntry => reasons += "<li>" + subEntry.reason.replace("-", " ") + "</li>");
                 reasons += "</ul>";
 
-                let date = new Date(startTime).toLocaleDateString() - new Date(expirationTime).toLocaleDateString();
-
                 const housebanFlexBar = document.createElement('div');
                 housebanFlexBar.className = 'housebans-flexBar';
                 housebanFlexBar.style.backgroundColor = color;
@@ -69,7 +67,7 @@
                 const dateElement = document.createElement('div');
                 dateElement.classList.add('text-20-300');
                 dateElement.classList.add('housebans-flexBar-date');
-                dateElement.textContent = date;
+                dateElement.textContent = new Date(startTime).toLocaleDateString() + " - " + new Date(expirationTime).toLocaleDateString();
 
                 housebanFlexBar.appendChild(nameElement);
                 housebanFlexBar.appendChild(reasonElement);
