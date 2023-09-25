@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <title>Gangwar | UCA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=chrome">
+    <link rel="shortcut icon" href="common/img/UCLogo_new.png" type="image/x-icon">
+    <link rel="stylesheet" href="common/css/master.css">
+    <link rel="stylesheet" href="common/css/font.css">
+    <meta http-equiv="refresh" content="10">
+</head>
+<body style="background-color: var(--darkgray)">
+
+<div class="gangwar">
+    <div class="gangwar-grid">
+        <div class="grid-a grid-center text-40-400">Angreifer</div>
+        <div class="grid-b grid-center"></div>
+        <div class="grid-c grid-center text-40-400">Verteidiger</div>
+        <div class="grid-d grid-center text-120-700" id="attacker"></div>
+        <div class="grid-e grid-center text-120-700"><p>:</p></div>
+        <div class="grid-f grid-center text-120-700" id="defender"></div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script>
+    window.onload = async function() {
+        try {
+            // const response = await fetch('http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/event');
+            const json = JSON.parse('{"bankRob":0,"gangwar":{"attacker":0,"defender":0},"bomb":1695650209191}');// await response.json();
+
+            const gangwar = json.gangwar;
+
+            document.getElementById("attacker").innerHTML = gangwar.attacker;
+            document.getElementById("defender").innerHTML = gangwar.defender;
+        } catch (error) {
+            console.error('Cannot fetch data:', error);
+        }
+    }
+</script>
