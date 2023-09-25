@@ -1,50 +1,3 @@
-<?php
-$json_data = json_decode(file_get_contents('http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/banner'));
-
-$faction = $json_data->faction;
-
-$bannerFactionArray = array(
-    0 => array(
-        "name" => "Calderon Kartell",
-        "bannerCount" => $faction->{"Calderon Kartell"}
-    ),
-    1 => array(
-        "name" => "Kerzakov Familie",
-        "bannerCount" => $faction->{"Kerzakov Familie"}
-    ),
-    2 => array(
-        "name" => "La Cosa Nostra",
-        "bannerCount" => $faction->{"La Cosa Nostra"}
-    ),
-    3 => array(
-        "name" => "Le Milieu",
-        "bannerCount" => $faction->{"Le Milieu"}
-    ),
-    4 => array(
-        "name" => "O'brien",
-        "bannerCount" => $faction->{"O'brien"}
-    ),
-    5 => array(
-        "name" => "Westside Ballas",
-        "bannerCount" => $faction->{"Westside Ballas"}
-    )
-);
-
-$sprayable = 0;
-$notSprayable = 0;
-
-$sprayedBanners = $json_data->sprayedBanners;
-foreach ($sprayedBanners as $banner) {
-    if ($banner->sprayable) {
-        $sprayable++;
-    } else {
-        $notSprayable++;
-    }
-}
-
-$history = $json_data->history;
-?>
-
 <!doctype html>
 <html lang="de">
 <head>
@@ -56,108 +9,8 @@ $history = $json_data->history;
     <link rel="shortcut icon" href="common/img/UCLogo_new.png" type="image/x-icon">
     <link rel="stylesheet" href="common/css/master.css">
     <link rel="stylesheet" href="common/css/font.css">
-    <script src="common/js/master.js"></script>
+    <script src="common/js/master.js" async></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load("current", {packages: ["corechart"]});
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            var bannerFactionData = google.visualization.arrayToDataTable([
-                ['Fraktion', 'Anzahl'],
-                [<?php echo "\"" . $bannerFactionArray[3]["name"] . "\", " . $bannerFactionArray[3]["bannerCount"] ?>], // blue
-                [<?php echo "\"" . $bannerFactionArray[1]["name"] . "\", " . $bannerFactionArray[1]["bannerCount"] ?>], // red
-                [<?php echo "\"" . $bannerFactionArray[0]["name"] . "\", " . $bannerFactionArray[0]["bannerCount"] ?>], // yellow
-                [<?php echo "\"" . $bannerFactionArray[4]["name"] . "\", " . $bannerFactionArray[4]["bannerCount"] ?>], // green
-                [<?php echo "\"" . $bannerFactionArray[5]["name"] . "\", " . $bannerFactionArray[5]["bannerCount"] ?>], // purple
-                [<?php echo "\"" . $bannerFactionArray[2]["name"] . "\", " . $bannerFactionArray[2]["bannerCount"] ?>] // cyan
-            ]);
-
-            var bannerSprayableData = google.visualization.arrayToDataTable([
-                ['Status', 'Anzahl'],
-                ['übersprühbar', <?php echo $sprayable ?>],
-                ['nicht übersprühbar', <?php echo $notSprayable ?>]
-            ]);
-
-            var bannerHistoryData = google.visualization.arrayToDataTable([
-                ['Vor Stunden', 'Le Milieu', 'Kerzakov Familie', 'Calderon Kartell', 'O\'brien', 'Westside Ballas', 'La Cosa Nostra'],
-
-                <?php
-                for ($i = count($history) - 1; $i > 0; $i--) {
-                    echo "[" . $i .
-                        ", " . $history[$i]->{$i}->{"Le Milieu"} .
-                        ", " . $history[$i]->{$i}->{"Kerzakov Familie"} .
-                        ", " . $history[$i]->{$i}->{"Calderon Kartell"} .
-                        ", " . $history[$i]->{$i}->{"O'brien"} .
-                        ", " . $history[$i]->{$i}->{"Westside Ballas"} .
-                        ", " . $history[$i]->{$i}->{"La Cosa Nostra"} .
-                        "],";
-                }
-                echo "[0, " . $history[0]->{0}->{"Le Milieu"} .
-                    ", " . $history[0]->{0}->{"Kerzakov Familie"} .
-                    ", " . $history[0]->{0}->{"Calderon Kartell"} .
-                    ", " . $history[0]->{0}->{"O'brien"} .
-                    ", " . $history[0]->{0}->{"Westside Ballas"} .
-                    ", " . $history[0]->{0}->{"La Cosa Nostra"} .
-                    "]";
-                ?>
-            ]);
-
-            var optionsPieChart = {
-                pieHole: 0.4,
-                backgroundColor: 'none',
-                legend: 'none',
-                chartArea: {top: 10, right: 10, bottom: 10, left: 10},
-                pieSliceText: 'label',
-                pieSliceBorderColor: 'transparent'
-            };
-
-            var optionsAreaChart = {
-                isStacked: false,
-                height: 300,
-                backgroundColor: 'transparent',
-                legend: {
-                    position: 'top',
-                    maxLines: 3,
-                    textStyle: {
-                        color: '#ffffff',
-                    }
-                },
-                chartArea: {
-                    left: 70,
-                    top: 70,
-                    width: '100%'
-                },
-                hAxis: {
-                    gridlines: '#ffffff',
-                    baselineColor: '#ffffff',
-                    title: 'vor Stunden',
-                    titleTextStyle: {
-                        color: '#ffffff'
-                    },
-                    textStyle: {
-                        color: '#ffffff',
-                    },
-                    direction: -1
-                },
-                vAxis: {
-                    gridlines: '#ffffff',
-                    baselineColor: '#ffffff',
-                    title: 'Anzahl',
-                    titleTextStyle: {
-                        color: '#ffffff'
-                    },
-                    textStyle: {
-                        color: '#ffffff',
-                    }
-                }
-            };
-
-            new google.visualization.PieChart(document.getElementById('banner_faction_chart')).draw(bannerFactionData, optionsPieChart);
-            new google.visualization.PieChart(document.getElementById('banner_sprayable_chart')).draw(bannerSprayableData, optionsPieChart);
-            new google.visualization.AreaChart(document.getElementById('banner_history_chart')).draw(bannerHistoryData, optionsAreaChart);
-        }
-    </script>
 </head>
 <body>
 
@@ -175,20 +28,7 @@ $history = $json_data->history;
             <div id="banner_faction_chart" style="width: 300px; height: 300px"></div>
         </div>
         <div class="grid-b">
-            <table style="width: 100%; border: none">
-                <?php
-                foreach ($bannerFactionArray as $bannerEntry) {
-                    $factionName = $bannerEntry["name"];
-                    $bannerCount = $bannerEntry["bannerCount"];
-
-                    echo "
-                        <tr>
-                            <td><p class='text-20-400'>" . $factionName . "</p></td>
-                            <td><p class='text-20-400' style='text-align: right'>" . $bannerCount . "</p></td>
-                        </tr>";
-                }
-                ?>
-            </table>
+            <table id="factionTable" style="width: 100%; border: none"></table>
         </div>
         <div class="grid-c grid-center">
             <div id="banner_sprayable_chart" style="width: 300px; height: 300px"></div>
@@ -197,11 +37,11 @@ $history = $json_data->history;
             <table style="width: 100%; border: none">
                 <tr>
                     <td><p class='text-20-400'>Übersprühbar</p></td>
-                    <td><p class='text-20-400' style='text-align: right'><?php echo $sprayable ?></p></td>
+                    <td><p class='text-20-400' style='text-align: right'><span id="sprayable"></span></p></td>
                 </tr>
                 <tr>
                     <td><p class='text-20-400'>Nicht übersprühbar</p></td>
-                    <td><p class='text-20-400' style='text-align: right'><?php echo $notSprayable ?></p></td>
+                    <td><p class='text-20-400' style='text-align: right'><span id="notSprayable"></span></p></td>
                 </tr>
             </table>
         </div>
@@ -215,3 +55,160 @@ $history = $json_data->history;
 
 </body>
 </html>
+
+<script>
+    async function fetchAndDisplayContent() {
+        try {
+            // const response = await fetch('http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/banner');
+            const json = JSON.parse('{"history":[{"0":{"Westside Ballas":30,"La Cosa Nostra":4,"Calderon Kartell":5,"Kerzakov Familie":0,"O\'brien":8,"Le Milieu":5}},{"1":{"Westside Ballas":24,"La Cosa Nostra":6,"Calderon Kartell":6,"Kerzakov Familie":0,"O\'brien":6,"Le Milieu":10}},{"2":{"Westside Ballas":30,"La Cosa Nostra":6,"Calderon Kartell":5,"Kerzakov Familie":0,"O\'brien":3,"Le Milieu":8}},{"3":{"Westside Ballas":34,"La Cosa Nostra":4,"Calderon Kartell":7,"Kerzakov Familie":0,"O\'brien":4,"Le Milieu":3}},{"4":{"Westside Ballas":27,"La Cosa Nostra":3,"Calderon Kartell":11,"Kerzakov Familie":0,"O\'brien":8,"Le Milieu":3}},{"5":{"Westside Ballas":24,"La Cosa Nostra":3,"Calderon Kartell":11,"Kerzakov Familie":0,"O\'brien":11,"Le Milieu":3}},{"6":{"Westside Ballas":10,"La Cosa Nostra":3,"Calderon Kartell":13,"Kerzakov Familie":0,"O\'brien":23,"Le Milieu":3}},{"7":{"Westside Ballas":3,"La Cosa Nostra":3,"Calderon Kartell":15,"Kerzakov Familie":0,"O\'brien":28,"Le Milieu":3}},{"8":{"Westside Ballas":3,"La Cosa Nostra":3,"Calderon Kartell":31,"Kerzakov Familie":0,"O\'brien":11,"Le Milieu":4}},{"9":{"Westside Ballas":4,"La Cosa Nostra":3,"Calderon Kartell":40,"Kerzakov Familie":0,"O\'brien":1,"Le Milieu":4}},{"10":{"Westside Ballas":4,"La Cosa Nostra":3,"Calderon Kartell":40,"Kerzakov Familie":0,"O\'brien":1,"Le Milieu":4}},{"11":{"Westside Ballas":11,"La Cosa Nostra":3,"Calderon Kartell":25,"Kerzakov Familie":0,"O\'brien":7,"Le Milieu":6}},{"12":{"Westside Ballas":21,"La Cosa Nostra":5,"Calderon Kartell":8,"Kerzakov Familie":0,"O\'brien":11,"Le Milieu":7}},{"13":{"Westside Ballas":21,"La Cosa Nostra":5,"Calderon Kartell":8,"Kerzakov Familie":0,"O\'brien":11,"Le Milieu":7}},{"14":{"Westside Ballas":21,"La Cosa Nostra":5,"Calderon Kartell":8,"Kerzakov Familie":1,"O\'brien":10,"Le Milieu":7}},{"15":{"Westside Ballas":23,"La Cosa Nostra":5,"Calderon Kartell":7,"Kerzakov Familie":3,"O\'brien":7,"Le Milieu":7}},{"16":{"Westside Ballas":23,"La Cosa Nostra":6,"Calderon Kartell":7,"Kerzakov Familie":2,"O\'brien":7,"Le Milieu":7}},{"17":{"Westside Ballas":24,"La Cosa Nostra":5,"Calderon Kartell":7,"Kerzakov Familie":2,"O\'brien":6,"Le Milieu":8}},{"18":{"Westside Ballas":14,"La Cosa Nostra":8,"Calderon Kartell":8,"Kerzakov Familie":0,"O\'brien":11,"Le Milieu":11}},{"19":{"Westside Ballas":15,"La Cosa Nostra":6,"Calderon Kartell":10,"Kerzakov Familie":1,"O\'brien":11,"Le Milieu":9}},{"20":{"Westside Ballas":13,"La Cosa Nostra":6,"Calderon Kartell":12,"Kerzakov Familie":1,"O\'brien":11,"Le Milieu":9}},{"21":{"Westside Ballas":15,"La Cosa Nostra":5,"Calderon Kartell":13,"Kerzakov Familie":1,"O\'brien":8,"Le Milieu":10}},{"22":{"Westside Ballas":14,"La Cosa Nostra":5,"Calderon Kartell":18,"Kerzakov Familie":1,"O\'brien":5,"Le Milieu":9}},{"23":{"Westside Ballas":13,"La Cosa Nostra":5,"Calderon Kartell":18,"Kerzakov Familie":3,"O\'brien":7,"Le Milieu":6}},{"24":{"Westside Ballas":14,"La Cosa Nostra":5,"Calderon Kartell":18,"Kerzakov Familie":0,"O\'brien":7,"Le Milieu":8}}],"sprayedBanners":[{"location":"193\\/66\\/484","sprayable":true,"time":1695557278685,"navipoint":"U-Bahn-[Altstadt]","faction":"O\'brien"},{"location":"1558\\/66\\/381","sprayable":true,"time":1695223240139,"navipoint":"Flughafen-[Las-Unicas]","faction":"Calderon Kartell"},{"location":"1526\\/105\\/-144","sprayable":true,"time":1695461197098,"navipoint":"Funpark","faction":"Westside Ballas"},{"location":"1158\\/70\\/-440","sprayable":true,"time":1695339058599,"navipoint":"Hafen-[China-Town]","faction":"Le Milieu"},{"location":"-648\\/73\\/350","sprayable":true,"time":1695412427850,"navipoint":"Gefängnis","faction":"Westside Ballas"},{"location":"1194\\/71\\/425","sprayable":true,"time":1695494982718,"navipoint":"Atomkraftwerk","faction":"La Cosa Nostra"},{"location":"1608\\/70\\/672","sprayable":true,"time":1695223132778,"navipoint":"Schule","faction":"Calderon Kartell"},{"location":"794\\/70\\/534","sprayable":true,"time":1695556879686,"navipoint":"KFZ-Anmeldestelle","faction":"O\'brien"},{"location":"-444\\/70\\/274","sprayable":true,"time":1695561432933,"navipoint":"Deathmatch-Arena","faction":"Westside Ballas"},{"location":"81\\/59\\/-78","sprayable":true,"time":1695549005729,"navipoint":"Brücke","faction":"Westside Ballas"},{"location":"-294\\/70\\/650","sprayable":true,"time":1695555784402,"navipoint":"Flughafen","faction":"Westside Ballas"},{"location":"669\\/70\\/26","sprayable":true,"time":1695558612161,"navipoint":"Unica17","faction":"La Cosa Nostra"},{"location":"222\\/68\\/762","sprayable":true,"time":1695551123607,"navipoint":"Brauerei","faction":"Westside Ballas"},{"location":"-116\\/70\\/-450","sprayable":true,"time":1695542286586,"navipoint":"Anwaltskanzlei","faction":"Westside Ballas"},{"location":"32\\/70\\/324","sprayable":true,"time":1695550807076,"navipoint":"U-Bahn-[Stadthalle]","faction":"Westside Ballas"},{"location":"-432\\/70\\/153","sprayable":false,"time":1695565209872,"navipoint":"Hafen","faction":"Westside Ballas"},{"location":"-394\\/70\\/35","sprayable":true,"time":1695557640917,"navipoint":"Hafen","faction":"Westside Ballas"},{"location":"848\\/70\\/452","sprayable":true,"time":1695547950759,"navipoint":"KFZ-Anmeldestelle","faction":"O\'brien"},{"location":"850\\/71\\/494","sprayable":true,"time":1695547928019,"navipoint":"KFZ-Anmeldestelle","faction":"O\'brien"},{"location":"775\\/70\\/-6","sprayable":true,"time":1695558506468,"navipoint":"Rotlichthotel","faction":"La Cosa Nostra"},{"location":"919\\/65\\/-41","sprayable":true,"time":1695377026760,"navipoint":"China-Town","faction":"Westside Ballas"},{"location":"899\\/75\\/25","sprayable":true,"time":1695526070113,"navipoint":"China-Town","faction":"Calderon Kartell"},{"location":"-268\\/71\\/353","sprayable":true,"time":1695563686369,"navipoint":"CFK-[Ballas]","faction":"Westside Ballas"},{"location":"-261\\/70\\/-464","sprayable":true,"time":1695489048434,"navipoint":"Freibad","faction":"Le Milieu"},{"location":"493\\/82\\/111","sprayable":true,"time":1695563355158,"navipoint":"Bücherladen","faction":"O\'brien"},{"location":"618\\/70\\/81","sprayable":true,"time":1695340752479,"navipoint":"Unica17","faction":"La Cosa Nostra"},{"location":"670\\/70\\/90","sprayable":true,"time":1695526571495,"navipoint":"Unica17","faction":"Calderon Kartell"},{"location":"852\\/59\\/251","sprayable":true,"time":1695563498967,"navipoint":"U-Bahn-[Kerzakov-Gebiet]","faction":"Westside Ballas"},{"location":"400\\/59\\/-1","sprayable":true,"time":1695135699391,"navipoint":"U-Bahn-[Mall]","faction":"Calderon Kartell"},{"location":"852\\/70\\/265","sprayable":true,"time":1695563485422,"navipoint":"U-Bahn-[Kerzakov-Gebiet]","faction":"Westside Ballas"},{"location":"-476\\/70\\/221","sprayable":false,"time":1695564851628,"navipoint":"Hochseefischer","faction":"Westside Ballas"},{"location":"78\\/70\\/240","sprayable":true,"time":1695550618090,"navipoint":"Park","faction":"Westside Ballas"},{"location":"309\\/70\\/197","sprayable":true,"time":1695558768179,"navipoint":"Krankenhaus","faction":"Westside Ballas"},{"location":"427\\/64\\/126","sprayable":true,"time":1695543797905,"navipoint":"Mall","faction":"Westside Ballas"},{"location":"488\\/70\\/85","sprayable":true,"time":1695563329440,"navipoint":"Mall","faction":"O\'brien"},{"location":"437\\/70\\/-74","sprayable":true,"time":1695556887776,"navipoint":"Fahrschule","faction":"Le Milieu"},{"location":"417\\/70\\/-87","sprayable":true,"time":1695556901859,"navipoint":"Fahrschule","faction":"Le Milieu"},{"location":"7\\/70\\/-249","sprayable":true,"time":1695562330419,"navipoint":"Komposthaufen","faction":"Westside Ballas"},{"location":"-365\\/70\\/530","sprayable":true,"time":1695557818712,"navipoint":"Neulingshotel","faction":"Westside Ballas"},{"location":"-92\\/70\\/195","sprayable":true,"time":1695563276242,"navipoint":"Bar","faction":"Westside Ballas"},{"location":"242\\/70\\/274","sprayable":true,"time":1695561612050,"navipoint":"Notaufnahme","faction":"O\'brien"},{"location":"62\\/70\\/354","sprayable":true,"time":1695551001232,"navipoint":"Cherrys","faction":"Westside Ballas"},{"location":"124\\/73\\/168","sprayable":true,"time":1695562377002,"navipoint":"Stadthalle","faction":"Westside Ballas"},{"location":"286\\/70\\/257","sprayable":true,"time":1695562393297,"navipoint":"Krankenhaus","faction":"Westside Ballas"},{"location":"66\\/72\\/202","sprayable":true,"time":1695550652521,"navipoint":"Supermarkt","faction":"Westside Ballas"},{"location":"113\\/70\\/-238","sprayable":true,"time":1695562361680,"navipoint":"Asservatenkammer","faction":"Westside Ballas"},{"location":"1752\\/64\\/669","sprayable":true,"time":1695556540705,"navipoint":"Raffinerie","faction":"Le Milieu"},{"location":"-16\\/62\\/289","sprayable":true,"time":1695550781281,"navipoint":"U-Bahn-[Stadthalle]","faction":"Westside Ballas"},{"location":"-171\\/70\\/231","sprayable":true,"time":1695556293909,"navipoint":"Waffenladen-[Ballas]","faction":"Westside Ballas"},{"location":"-57\\/70\\/252","sprayable":true,"time":1695550755772,"navipoint":"U-Bahn-[Stadthalle]","faction":"Westside Ballas"},{"location":"-361\\/71\\/455","sprayable":true,"time":1695555840420,"navipoint":"U-Bahn-[Gang Gebiet]","faction":"Westside Ballas"},{"location":"-450\\/70\\/365","sprayable":false,"time":1695564924859,"navipoint":"Plattenbau","faction":"Westside Ballas"}],"faction":{"Westside Ballas":31,"La Cosa Nostra":4,"Calderon Kartell":5,"Kerzakov Familie":0,"O\'brien":7,"Le Milieu":5}}');// await response.json();
+
+            // ==========================
+            // faction banner table
+            // ==========================
+            const faction = json.faction;
+
+            const factionBannerArray = Object.keys(faction).map(name => ({
+                name: name,
+                bannerCount: faction[name]
+            }));
+
+            const factionTableElement = document.getElementById("factionTable");
+
+            factionBannerArray.forEach(value => {
+                const row = factionTableElement.insertRow();
+                row.classList.add("text-20-400");
+                row.insertCell(0).innerHTML = `<p class="text-20-400">${value.name}</p>`;
+                row.insertCell(1).innerHTML = `<p class="text-20-400" style="text-align: right">${value.bannerCount}</p>`;
+            });
+
+            // ==========================
+            // sprayed banners count
+            // ==========================
+            const sprayedBanners = json.sprayedBanners;
+
+            let sprayable = 0;
+            let notSprayable = 0;
+
+            sprayedBanners.forEach(bannerEntry => {
+                if (bannerEntry.sprayable) {
+                    sprayable++;
+                } else {
+                    notSprayable++;
+                }
+            });
+
+            document.getElementById("sprayable").innerText = sprayable;
+            document.getElementById("notSprayable").innerText = notSprayable;
+
+            // ==========================
+            // charts
+            // ==========================
+            google.charts.load('current', { packages: ['corechart'] });
+            google.charts.setOnLoadCallback(() => {
+                drawBannerFactionChart(factionBannerArray);
+                drawBannerSprayableChart(sprayable, notSprayable);
+                drawBannerHistoryChart(json.history);
+            });
+
+            function drawBannerFactionChart(factionBannerArray) {
+                const bannerFactionData = google.visualization.arrayToDataTable([
+                    ['Fraktion', 'Anzahl'],
+                    [factionBannerArray[3].name, factionBannerArray[3].bannerCount], // blue
+                    [factionBannerArray[1].name, factionBannerArray[1].bannerCount], // red
+                    [factionBannerArray[0].name, factionBannerArray[0].bannerCount], // yellow
+                    [factionBannerArray[4].name, factionBannerArray[4].bannerCount], // green
+                    [factionBannerArray[5].name, factionBannerArray[5].bannerCount], // purple
+                    [factionBannerArray[2].name, factionBannerArray[2].bannerCount] // cyan
+                ]);
+
+                var options = {
+                    pieHole: 0.4,
+                    backgroundColor: 'none',
+                    legend: 'none',
+                    chartArea: {top: 10, right: 10, bottom: 10, left: 10},
+                    pieSliceText: 'label',
+                    pieSliceBorderColor: 'transparent'
+                };
+
+                const chart = new google.visualization.PieChart(document.getElementById('banner_faction_chart'));
+                chart.draw(bannerFactionData, options);
+            }
+
+            function drawBannerSprayableChart(sprayable, notSprayable) {
+                const bannerSprayableData = google.visualization.arrayToDataTable([
+                    ['Status', 'Anzahl'],
+                    ['übersprühbar', sprayable],
+                    ['nicht übersprühbar', notSprayable]
+                ]);
+
+                var options = {
+                    pieHole: 0.4,
+                    backgroundColor: 'none',
+                    legend: 'none',
+                    chartArea: {top: 10, right: 10, bottom: 10, left: 10},
+                    pieSliceText: 'label',
+                    pieSliceBorderColor: 'transparent'
+                };
+
+                const chart = new google.visualization.PieChart(document.getElementById('banner_sprayable_chart'));
+                chart.draw(bannerSprayableData, options);
+            }
+
+            function drawBannerHistoryChart(history) {
+                const data = [['Vor Stunden', 'Le Milieu', 'Kerzakov Familie', 'Calderon Kartell', 'O\'brien', 'Westside Ballas', 'La Cosa Nostra']];
+                for (let i = 0; i < history.length; i++) {
+                    const he = history[i][i];
+                    data.push([i, he["Le Milieu"], he["Kerzakov Familie"], he["Calderon Kartell"], he["O'brien"], he["Westside Ballas"], he["La Cosa Nostra"]]);
+                }
+
+                const bannerHistoryData = google.visualization.arrayToDataTable(data);
+
+                var options = {
+                    isStacked: false,
+                    height: 300,
+                    backgroundColor: 'transparent',
+                    legend: {
+                        position: 'top',
+                        maxLines: 3,
+                        textStyle: {
+                            color: '#ffffff',
+                        }
+                    },
+                    chartArea: {
+                        left: 70,
+                        top: 70,
+                        width: '100%'
+                    },
+                    hAxis: {
+                        gridlines: '#ffffff',
+                        baselineColor: '#ffffff',
+                        title: 'vor Stunden',
+                        titleTextStyle: {
+                            color: '#ffffff'
+                        },
+                        textStyle: {
+                            color: '#ffffff',
+                        },
+                        direction: -1
+                    },
+                    vAxis: {
+                        gridlines: '#ffffff',
+                        baselineColor: '#ffffff',
+                        title: 'Anzahl',
+                        titleTextStyle: {
+                            color: '#ffffff'
+                        },
+                        textStyle: {
+                            color: '#ffffff',
+                        }
+                    }
+                };
+
+                const chart = new google.visualization.AreaChart(document.getElementById('banner_history_chart'));
+                chart.draw(bannerHistoryData, options);
+            }
+        } catch (error) {
+            console.error('Cannot fetch data:', error);
+        }
+    }
+</script>
