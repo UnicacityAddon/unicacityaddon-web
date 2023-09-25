@@ -13,14 +13,14 @@ window.onload = async function() {
     document.getElementById('nav').innerHTML = `
         <a class="nav-child nav-child-right text-20-400" href=${downloadLink}>Download</a>
         <span class="nav-child text-20-400" style="float: right"> | </span>
-        <a class="nav-child nav-child-right text-20-400" href="/player">Spieler</a>
-        <a class="nav-child nav-child-right text-20-400" href="/banner">Banner</a>
-        <a class="nav-child nav-child-right text-20-400" href="/houseBans">House Bans</a>
-        <a class="nav-child nav-child-right text-20-400" href="/wantedReasons">Wanted Reasons</a>
-        <a class="nav-child nav-child-right text-20-400" href="/team">Team</a>
+        <a class="nav-child nav-child-right text-20-400" href="player.html">Spieler</a>
+        <a class="nav-child nav-child-right text-20-400" href="banner.html">Banner</a>
+        <a class="nav-child nav-child-right text-20-400" href="houseBans.html">House Bans</a>
+        <a class="nav-child nav-child-right text-20-400" href="wantedReasons.html">Wanted Reasons</a>
+        <a class="nav-child nav-child-right text-20-400" href="team.html">Team</a>
         <a class="nav-child nav-child-right text-20-400" href="https://wiki.unicacityaddon.rettichlp.de/">Wiki</a>
         <a class="nav-child nav-child-right text-20-400" href="https://github.com/UnicacityAddon/unicacityaddon-addon/tree/main">GitHub</a>
-        <a class="nav-child nav-child-left text-20-800" href="/">UnicacityAddon</a>`;
+        <a class="nav-child nav-child-left text-20-800" href="index.html">UnicacityAddon</a>`;
 
     document.getElementById('footer').innerHTML = `
         <div class="footer-grid">
@@ -37,11 +37,11 @@ window.onload = async function() {
             </div>
             <div class="grid-c grid-right">
                 <p class="text-20-800">Gameplay</p>
-                <a class="text-14-400" style="text-decoration: none; color: white;" href="/wantedReasons">Wanted Reasons</a><br>
-                <a class="text-14-400" style="text-decoration: none; color: white;" href="/houseBans">House Bans</a><br>
-                <a class="text-14-400" style="text-decoration: none; color: white;" href="/banner">Banner</a><br>
-                <a class="text-14-400" style="text-decoration: none; color: white;" href="/player">Spieler</a><br>
-                <a class="text-14-400" style="text-decoration: none; color: white;" href="/gangwar">Gangwar</a><br>
+                <a class="text-14-400" style="text-decoration: none; color: white;" href="wantedReasons.html">Wanted Reasons</a><br>
+                <a class="text-14-400" style="text-decoration: none; color: white;" href="houseBans.html">House Bans</a><br>
+                <a class="text-14-400" style="text-decoration: none; color: white;" href="banner.html">Banner</a><br>
+                <a class="text-14-400" style="text-decoration: none; color: white;" href="player.html">Spieler</a><br>
+                <a class="text-14-400" style="text-decoration: none; color: white;" href="gangwar.html">Gangwar</a><br>
             </div>
             <div class="grid-d grid-right">
                 <p class="text-20-800">Development</p>
