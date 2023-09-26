@@ -131,8 +131,8 @@
 <script>
     async function fetchAndDisplayContent() {
         try {
-            // const response = await fetch('http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/mgmt');
-            const json = JSON.parse('{"requests":25920718,"totalClients":1438,"activeClients":391,"latestVersion":"2.4.0","versions":[{"version":"1.0.0","users":25},{"version":"2.4.0","users":7},{"version":"2.3.0","users":621},{"version":"1.10.3","users":240},{"version":"1.6.0","users":81},{"version":"1.10.1","users":35},{"version":"1.8.4","users":50},{"version":"1.9.2","users":108},{"version":"1.10.2","users":27},{"version":"1.7.1","users":2},{"version":"2.1.0","users":52},{"version":"1.8.1","users":6},{"version":"2.1.0-dev","users":5},{"version":"2.0.0","users":46},{"version":"1.8.3","users":4},{"version":"1.10.0","users":7},{"version":"1.7.3","users":30},{"version":"1.7.0","users":16},{"version":"1.7.2","users":6},{"version":"2.2.0","users":22},{"version":"2.4.0-dev","users":4},{"version":"1.7.4","users":15},{"version":"2.0.0-alpha.6","users":1},{"version":"2.0.0-alpha","users":4},{"version":"2.0.0-alpha.4","users":1},{"version":"1.7.5","users":13},{"version":"1.9.1","users":1},{"version":"1.9.0-dev","users":3},{"version":"1.9.0","users":3},{"version":"2.0.0-alpha.3","users":2},{"version":"2.0.0-alpha.7","users":1}]}');// await response.json();
+            const response = await fetch('https://rettichlp.de:8443/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/mgmt');
+            const json = await response.json();
 
             const latestVersion = json.latestVersion;
             const totalClients = json.totalClients;

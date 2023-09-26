@@ -30,8 +30,8 @@
 <script>
     window.onload = async function() {
         try {
-            // const response = await fetch('http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/event');
-            const json = JSON.parse('{"bankRob":0,"gangwar":{"attacker":0,"defender":0},"bomb":1695650209191}');// await response.json();
+            const response = await fetch('https://rettichlp.de:8443/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/event');
+            const json = await response.json();
 
             const gangwar = json.gangwar;
 
