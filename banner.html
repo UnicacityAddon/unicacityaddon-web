@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <title>Banner | UCA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=chrome">
+    <link rel="shortcut icon" href="common/img/UCLogo_new.png" type="image/x-icon">
+    <link rel="stylesheet" href="common/css/master.css">
+    <link rel="stylesheet" href="common/css/font.css">
+    <script src="common/js/master.js" async></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+
+<nav id="nav"></nav>
+
+<video autoplay muted loop id="backgroundVideo">
+    <source src="common/img/UnicacityAddonWebsiteBackground.mp4" type="video/mp4">
+</video>
+
+<div class="banner">
+    <p class="text-50-700">Banner</p>
+
+    <div class="banner-grid">
+        <div class="grid-a grid-center">
+            <div id="banner_faction_chart" style="width: 300px; height: 300px"></div>
+        </div>
+        <div class="grid-b">
+            <table id="factionTable" style="width: 100%; border: none"></table>
+        </div>
+        <div class="grid-c grid-center">
+            <div id="banner_sprayable_chart" style="width: 300px; height: 300px"></div>
+        </div>
+        <div class="grid-d">
+            <table style="width: 100%; border: none">
+                <tr>
+                    <td><p class='text-20-400'>Übersprühbar</p></td>
+                    <td><p class='text-20-400' style='text-align: right'><span id="sprayable"></span></p></td>
+                </tr>
+                <tr>
+                    <td><p class='text-20-400'>Nicht übersprühbar</p></td>
+                    <td><p class='text-20-400' style='text-align: right'><span id="notSprayable"></span></p></td>
+                </tr>
+            </table>
+        </div>
+        <div class="grid-e">
+            <div id="banner_history_chart" style="width: 100%;"></div>
+        </div>
+    </div>
+</div>
+
+<div id="footer"></div>
+
+</body>
+</html>
+
+<script>
+    async function fetchAndDisplayContent() {
+        try {
+            const response = await fetch('https://rettichlp.de:8443/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/banner');
+            const json = await response.json();
+
+            // ==========================
+            // faction banner table
+            // ==========================
+            const faction = json.faction;
+
+            const factionBannerArray = Object.keys(faction).map(name => ({
+                name: name,
+                bannerCount: faction[name]
+            }));
+
+            const factionTableElement = document.getElementById("factionTable");
+
+            factionBannerArray.forEach(value => {
+                const row = factionTableElement.insertRow();
+                row.classList.add("text-20-400");
+                row.insertCell(0).innerHTML = `<p class="text-20-400">${value.name}</p>`;
+                row.insertCell(1).innerHTML = `<p class="text-20-400" style="text-align: right">${value.bannerCount}</p>`;
+            });
+
+            // ==========================
+            // sprayed banners count
+            // ==========================
+            const sprayedBanners = json.sprayedBanners;
+
+            let sprayable = 0;
+            let notSprayable = 0;
+
+            sprayedBanners.forEach(bannerEntry => {
+                if (bannerEntry.sprayable) {
+                    sprayable++;
+                } else {
+                    notSprayable++;
+                }
+            });
+
+            document.getElementById("sprayable").innerText = sprayable;
+            document.getElementById("notSprayable").innerText = notSprayable;
+
+            // ==========================
+            // charts
+            // ==========================
+            google.charts.load('current', { packages: ['corechart'] });
+            google.charts.setOnLoadCallback(() => {
+                drawBannerFactionChart(factionBannerArray);
+                drawBannerSprayableChart(sprayable, notSprayable);
+                drawBannerHistoryChart(json.history);
+            });
+
+            function drawBannerFactionChart(factionBannerArray) {
+                const bannerFactionData = google.visualization.arrayToDataTable([
+                    ['Fraktion', 'Anzahl'],
+                    [factionBannerArray[3].name, factionBannerArray[3].bannerCount], // blue
+                    [factionBannerArray[1].name, factionBannerArray[1].bannerCount], // red
+                    [factionBannerArray[0].name, factionBannerArray[0].bannerCount], // yellow
+                    [factionBannerArray[4].name, factionBannerArray[4].bannerCount], // green
+                    [factionBannerArray[5].name, factionBannerArray[5].bannerCount], // purple
+                    [factionBannerArray[2].name, factionBannerArray[2].bannerCount] // cyan
+                ]);
+
+                var options = {
+                    pieHole: 0.4,
+                    backgroundColor: 'none',
+                    legend: 'none',
+                    chartArea: {top: 10, right: 10, bottom: 10, left: 10},
+                    pieSliceText: 'label',
+                    pieSliceBorderColor: 'transparent'
+                };
+
+                const chart = new google.visualization.PieChart(document.getElementById('banner_faction_chart'));
+                chart.draw(bannerFactionData, options);
+            }
+
+            function drawBannerSprayableChart(sprayable, notSprayable) {
+                const bannerSprayableData = google.visualization.arrayToDataTable([
+                    ['Status', 'Anzahl'],
+                    ['übersprühbar', sprayable],
+                    ['nicht übersprühbar', notSprayable]
+                ]);
+
+                var options = {
+                    pieHole: 0.4,
+                    backgroundColor: 'none',
+                    legend: 'none',
+                    chartArea: {top: 10, right: 10, bottom: 10, left: 10},
+                    pieSliceText: 'label',
+                    pieSliceBorderColor: 'transparent'
+                };
+
+                const chart = new google.visualization.PieChart(document.getElementById('banner_sprayable_chart'));
+                chart.draw(bannerSprayableData, options);
+            }
+
+            function drawBannerHistoryChart(history) {
+                const data = [['Vor Stunden', 'Le Milieu', 'Kerzakov Familie', 'Calderon Kartell', 'O\'brien', 'Westside Ballas', 'La Cosa Nostra']];
+                for (let i = 0; i < history.length; i++) {
+                    const he = history[i][i];
+                    data.push([i, he["Le Milieu"], he["Kerzakov Familie"], he["Calderon Kartell"], he["O'brien"], he["Westside Ballas"], he["La Cosa Nostra"]]);
+                }
+
+                const bannerHistoryData = google.visualization.arrayToDataTable(data);
+
+                var options = {
+                    isStacked: false,
+                    height: 300,
+                    backgroundColor: 'transparent',
+                    legend: {
+                        position: 'top',
+                        maxLines: 3,
+                        textStyle: {
+                            color: '#ffffff',
+                        }
+                    },
+                    chartArea: {
+                        left: 70,
+                        top: 70,
+                        width: '100%'
+                    },
+                    hAxis: {
+                        gridlines: '#ffffff',
+                        baselineColor: '#ffffff',
+                        title: 'vor Stunden',
+                        titleTextStyle: {
+                            color: '#ffffff'
+                        },
+                        textStyle: {
+                            color: '#ffffff',
+                        },
+                        direction: -1
+                    },
+                    vAxis: {
+                        gridlines: '#ffffff',
+                        baselineColor: '#ffffff',
+                        title: 'Anzahl',
+                        titleTextStyle: {
+                            color: '#ffffff'
+                        },
+                        textStyle: {
+                            color: '#ffffff',
+                        }
+                    }
+                };
+
+                const chart = new google.visualization.AreaChart(document.getElementById('banner_history_chart'));
+                chart.draw(bannerHistoryData, options);
+            }
+        } catch (error) {
+            console.error('Cannot fetch data:', error);
+        }
+    }
+</script>
