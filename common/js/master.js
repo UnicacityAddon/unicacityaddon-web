@@ -63,7 +63,7 @@ window.onload = async function() {
 }
 
 function getLatestVersion() {
-    return fetch('https://rettichlp.de:8443/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/mgmt')
+    return fetch('https://rettichlp.de:8443/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/mgmt', {mode: "no-cors"})
         .then(response => response.json())
         .then(json => json.latestVersion)
         .catch(error => {
