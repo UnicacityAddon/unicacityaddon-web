@@ -1,66 +1,28 @@
-<?php
-$json_data = json_decode(file_get_contents('http://rettichlp.de:8888/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/mgmt'));
-
-$activeClients = $json_data->activeClients;
-$totalClients = $json_data->totalClients;
-$requests = $json_data->requests;
-$formattedRequests = number_format($requests, 0, ",", ".");
-$latestVersion = $json_data->latestVersion;
-$versions = $json_data->versions;
-?>
-
 <!doctype html>
 <html lang="de">
 <head>
-    <?php include "common/php/head.php"; ?>
     <title>UnicacityAddon | UCA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=chrome">
+    <link rel="shortcut icon" href="common/img/UCLogo_new.png" type="image/x-icon">
+    <link rel="stylesheet" href="common/css/master.css">
+    <link rel="stylesheet" href="common/css/font.css">
+    <script src="common/js/master.js" async></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load("current", {packages: ["corechart"]});
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            var activePlayersData = google.visualization.arrayToDataTable([
-                ['Status', 'Anzahl'],
-                ['Aktive Spieler', <?php echo $activeClients ?>],
-                ['Inaktive Spieler', <?php echo $totalClients - $activeClients ?>]
-            ]);
-
-            var activePlayersData2 = google.visualization.arrayToDataTable([
-                ['Version', 'Anzahl der Spieler'],
-                <?php
-                foreach ($versions as $version) {
-                    echo "['" . $version->version . "', " . $version->users . "],";
-                }
-                ?>
-                ['', 0]
-            ]);
-
-            var options = {
-                pieHole: 0.4,
-                backgroundColor: 'none',
-                legend: 'none',
-                chartArea: {top: 10, right: 10, bottom: 10, left: 10},
-                pieSliceBorderColor: 'transparent'
-            };
-
-            new google.visualization.PieChart(document.getElementById('player_activity_chart')).draw(activePlayersData, options);
-            new google.visualization.PieChart(document.getElementById('version_overview_chart')).draw(activePlayersData2, options);
-        }
-    </script>
 </head>
 <body>
+
+<nav id="nav"></nav>
 
 <video autoplay muted loop id="backgroundVideo">
     <source src="common/img/UnicacityAddonWebsiteBackground.mp4" type="video/mp4">
 </video>
 
-<?php include "common/php/nav.php"; ?>
-
 <div class="index-main">
     <div class="index-main-content">
-        <p class="text-80-700">UnicacityAddon <span class="text-40-400">v<span
-                        style="color: var(--blue)"><?php echo $latestVersion ?></span></span></p>
+        <p class="text-80-700">UnicacityAddon <span class="text-40-400">v<span id="latestVersion" style="color: var(--blue)"></span></span></p>
         <p class="text-25-300">
             by RettichLP and Dimiikou<br><br>
             This addon is a modification for <a class="link" href="http://unicacity.de/" target="_blank">UnicaCity</a>
@@ -68,7 +30,7 @@ $versions = $json_data->versions;
             and nice-to-have features and utilities for everyday gameplay.
         </p>
         <p class="text-50-700" style="color: var(--blue);">#improveYourGame</p>
-        <a href="https://github.com/UnicacityAddon/unicacityaddon-addon/releases/download/v<?php echo $latestVersion ?>/UnicacityAddon-<?php echo $latestVersion ?>.jar">
+        <a id="downloadLink" href="https://github.com/UnicacityAddon/unicacityaddon-addon/releases/latest">
             <button class="button-download">Download</button>
         </a>
     </div>
@@ -107,22 +69,22 @@ $versions = $json_data->versions;
             <table style="border: none; width: 100%">
                 <tr>
                     <td class="text-20-400">Spieleranzahl (gesamt):</td>
-                    <td class="text-20-800" style="color: var(--blue); float: right;"><?php echo $totalClients ?> Spieler</td>
+                    <td class="text-20-800" style="color: var(--blue); float: right;"><span id="totalClients"></span> Spieler</td>
                 </tr>
                 <tr>
                     <td class="text-20-400">Spieleranzahl (letzten 3 Tage):</td>
-                    <td class="text-20-800" style="color: var(--blue); float: right;"><?php echo $activeClients ?> Spieler</td>
+                    <td class="text-20-800" style="color: var(--blue); float: right;"><span id="activeClients"></span> Spieler</td>
                 </tr>
                 <tr>
                     <td class="text-20-400">Spieleranzahl (inaktiv):</td>
-                    <td class="text-20-800" style="color: var(--blue); float: right;"><?php echo $totalClients - $activeClients ?> Spieler</td>
+                    <td class="text-20-800" style="color: var(--blue); float: right;"><span id="inactiveClients"></span> Spieler</td>
                 </tr>
             </table>
             <br><br>
             <table style="border: none; width: 100%">
                 <tr>
                     <td class="text-20-400">API Anfragen (gesamt):</td>
-                    <td class="text-20-800" style="color: var(--blue); float: right;"><?php echo $formattedRequests ?> Requests</td>
+                    <td class="text-20-800" style="color: var(--blue); float: right;"><span id="requests"></span> Requests</td>
                 </tr>
             </table>
         </div>
@@ -161,7 +123,77 @@ $versions = $json_data->versions;
     </div>
 </div>
 
-<?php include "common/php/footer.php"; ?>
+<div id="footer"></div>
 
 </body>
 </html>
+
+<script>
+    async function fetchAndDisplayContent() {
+        try {
+            const response = await fetch('https://rettichlp.de:8443/unicacityaddon/v1/dhgpsklnag2354668ec1d905xcv34d9bdee4b877/mgmt');
+            const json = await response.json();
+
+            const latestVersion = json.latestVersion;
+            const totalClients = json.totalClients;
+            const activeClients = json.activeClients;
+            const inactiveClients = totalClients - activeClients;
+            const requests = new Intl.NumberFormat('de-DE').format(json.requests);
+
+            document.getElementById("latestVersion").innerText = latestVersion;
+            document.getElementById("downloadLink").setAttribute("href", "https://github.com/UnicacityAddon/unicacityaddon-addon/releases/download/v" + latestVersion + "/unicacityaddon-" + latestVersion + ".jar");
+
+            document.getElementById("totalClients").innerText = totalClients;
+            document.getElementById("activeClients").innerText = activeClients;
+            document.getElementById("inactiveClients").innerText = inactiveClients;
+            document.getElementById("requests").innerText = requests;
+
+            google.charts.load('current', { packages: ['corechart'] });
+            google.charts.setOnLoadCallback(() => {
+                drawActivePlayersChart(activeClients, inactiveClients);
+                drawVersionOverviewChart(json.versions);
+            });
+
+            function drawActivePlayersChart(active, inactive) {
+                const activePlayersData = google.visualization.arrayToDataTable([
+                    ['Status', 'Anzahl'],
+                    ['Aktive Spieler', active],
+                    ['Inaktive Spieler', inactive]
+                ]);
+
+                const options = {
+                    pieHole: 0.4,
+                    backgroundColor: 'none',
+                    legend: 'none',
+                    chartArea: { top: 10, right: 10, bottom: 10, left: 10 },
+                    pieSliceBorderColor: 'transparent'
+                };
+
+                const chart = new google.visualization.PieChart(document.getElementById('player_activity_chart'));
+                chart.draw(activePlayersData, options);
+            }
+
+            function drawVersionOverviewChart(versionData) {
+                const data = [['Version', 'Anzahl der Spieler']];
+                versionData.forEach(version => {
+                    data.push([version.version, version.users]);
+                });
+
+                const versionOverviewData = google.visualization.arrayToDataTable(data);
+
+                const options = {
+                    pieHole: 0.4,
+                    backgroundColor: 'none',
+                    legend: 'none',
+                    chartArea: { top: 10, right: 10, bottom: 10, left: 10 },
+                    pieSliceBorderColor: 'transparent'
+                };
+
+                const chart = new google.visualization.PieChart(document.getElementById('version_overview_chart'));
+                chart.draw(versionOverviewData, options);
+            }
+        } catch (error) {
+            console.error('Cannot fetch data:', error);
+        }
+    }
+</script>
