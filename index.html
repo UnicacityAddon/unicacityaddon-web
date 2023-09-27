@@ -22,7 +22,7 @@
 
 <div class="index-main">
     <div class="index-main-content">
-        <p class="text-80-700">UnicacityAddon <span class="text-40-400">v<span id="latestVersion" style="color: var(--blue)"></span></span></p>
+        <p class="text-80-700">UnicacityAddon <span class="text-40-400">v<span name="latestVersion" style="color: var(--blue)"></span></span></p>
         <p class="text-25-300">
             by RettichLP and Dimiikou<br><br>
             This addon is a modification for <a class="link" href="http://unicacity.de/" target="_blank">UnicaCity</a>
@@ -62,7 +62,7 @@
             <table style="border: none; width: 100%">
                 <tr>
                     <td class="text-20-400">Aktueller Main-Release:</td>
-                    <td class="text-20-800" style="color: var(--blue); float: right;">v<?php echo $latestVersion ?></td>
+                    <td class="text-20-800" style="color: var(--blue); float: right;">v<span name="latestVersion"></span></td>
                 </tr>
             </table>
             <br><br>
@@ -140,7 +140,7 @@
             const inactiveClients = totalClients - activeClients;
             const requests = new Intl.NumberFormat('de-DE').format(json.requests);
 
-            document.getElementById("latestVersion").innerText = latestVersion;
+            document.getElementsByName("latestVersion").forEach(element => element.innerText = latestVersion);
             document.getElementById("downloadLink").setAttribute("href", "https://github.com/UnicacityAddon/unicacityaddon-addon/releases/download/v" + latestVersion + "/unicacityaddon-" + latestVersion + ".jar");
 
             document.getElementById("totalClients").innerText = totalClients;
